@@ -4334,49 +4334,47 @@ document.addEventListener(
 
 
 /* =====================================================
-   AUTO SCROLL
-   SMOOTH PREMIUM VERSION
+   AUTO SCROLL — FIX HP + LAPTOP
 ===================================================== */
 
 let autoScrollRunning = false;
-
 let autoScrollRAF = null;
-
 let resumeTimer = null;
 
-
 /*
-   Kecepatan:
-
-   PC = 0.72 px/frame
-   HP = 0.52 px/frame
-
-   Lebih halus dan tidak terasa
-   seperti melompat.
+   Kecepatan auto-scroll.
+   HP sedikit lebih cepat supaya terasa nyaman.
 */
-
 let autoScrollSpeed =
     window.innerWidth <= 750
-        ? 0.52
-        : 0.72;
+        ? 0.75
+        : 0.90;
 
 
 /* =====================================================
-   CEK INTRO
+   CEK WEBSITE SUDAH DIBUKA
 ===================================================== */
 
 function isWebsiteOpened(){
 
     const introElement =
-        document.getElementById(
-            "intro"
-        );
+        document.getElementById("intro");
+
+    return (
+        introElement &&
+        introElement.classList.contains("hide")
+    );
+}
 
 
-    return introElement &&
-           introElement.classList.contains(
-               "hide"
-           );
+/* =====================================================
+   CEK GAME SEDANG BERJALAN
+===================================================== */
+
+function isGameRunning(){
+
+    return typeof gameRunning !== "undefined"
+        && gameRunning === true;
 
 }
 
@@ -4395,12 +4393,20 @@ function autoScrollLoop(){
 
     }
 
-/* JANGAN AUTO SCROLL SAAT GAME BERJALAN */
-if(gameRunning){
-    autoScrollRunning = false;
-    autoScrollRAF = null;
-    return;
-}
+
+    /*
+       Jangan auto-scroll ketika game sedang dimainkan.
+    */
+
+    if(isGameRunning()){
+
+        stopAutoScroll();
+
+        return;
+
+    }
+
+
     const maxScroll =
         document.documentElement.scrollHeight -
         window.innerHeight;
@@ -4411,18 +4417,15 @@ if(gameRunning){
 
 
     /*
-       Sampai bawah halaman:
-       berhenti otomatis.
+       Sudah sampai bawah.
     */
 
     if(
         maxScroll <= 0 ||
-        currentScroll >= maxScroll - 1
+        currentScroll >= maxScroll - 2
     ){
 
-        autoScrollRunning = false;
-
-        autoScrollRAF = null;
+        stopAutoScroll();
 
         return;
 
@@ -4430,14 +4433,14 @@ if(gameRunning){
 
 
     /*
-       Scroll sedikit demi sedikit.
-       requestAnimationFrame membuat gerakan
-       lebih smooth.
+       Scroll menggunakan scrollBy.
+       Lebih stabil di HP dibanding
+       window.scrollTo dengan posisi manual.
     */
 
-    window.scrollTo(
+    window.scrollBy(
         0,
-        currentScroll + autoScrollSpeed
+        autoScrollSpeed
     );
 
 
@@ -4462,10 +4465,12 @@ function startAutoScroll(){
     }
 
 
-    /*
-       Jangan membuat loop baru
-       jika sudah berjalan.
-    */
+    if(isGameRunning()){
+
+        return;
+
+    }
+
 
     if(autoScrollRunning){
 
@@ -4475,6 +4480,15 @@ function startAutoScroll(){
 
 
     autoScrollRunning = true;
+
+
+    if(autoScrollRAF !== null){
+
+        cancelAnimationFrame(
+            autoScrollRAF
+        );
+
+    }
 
 
     autoScrollRAF =
@@ -4500,6 +4514,10 @@ function stopAutoScroll(){
             autoScrollRAF
         );
 
+        cancelAnimationFrame(
+            autoScrollRAF
+        );
+
         autoScrollRAF = null;
 
     }
@@ -4508,17 +4526,12 @@ function stopAutoScroll(){
 
 
 /* =====================================================
-   RESTART AUTO SCROLL
+   RESUME AUTO SCROLL
 ===================================================== */
 
-function restartAutoScroll(){
-
-    if(!isWebsiteOpened()){
-
-        return;
-
-    }
-
+function restartAutoScroll(
+    delay = 500
+){
 
     clearTimeout(
         resumeTimer
@@ -4529,10 +4542,17 @@ function restartAutoScroll(){
         setTimeout(
             function(){
 
-                startAutoScroll();
+                if(
+                    isWebsiteOpened() &&
+                    !isGameRunning()
+                ){
+
+                    startAutoScroll();
+
+                }
 
             },
-            100
+            delay
         );
 
 }
@@ -4552,27 +4572,26 @@ openBtn.addEventListener(
 
 
         /*
-           Tunggu intro menghilang,
-           kemudian mulai scroll.
+           Intro menghilang dahulu,
+           kemudian auto-scroll dimulai.
         */
 
-        resumeTimer =
-            setTimeout(
-                function(){
+        setTimeout(
+            function(){
 
-                    startAutoScroll();
+                startAutoScroll();
 
-                },
-                500
-            );
+            },
+            700
+        );
 
     }
 );
 
 
 /* =====================================================
-   SETIAP KLIK
-   AUTO SCROLL LANGSUNG LANJUT
+   KLIK BIASA
+   SETELAH KLIK → AUTO SCROLL LANJUT
 ===================================================== */
 
 document.addEventListener(
@@ -4584,33 +4603,47 @@ document.addEventListener(
             return;
 
         }
- /* JANGAN AUTO SCROLL JIKA KLIK DI DALAM GAME */
-if(
-    document.getElementById("game") &&
-    document.getElementById("game").contains(e.target)
-){
-    return;
-}
+
+
+        /*
+           Jangan mengganggu game.
+        */
+
+        const game =
+            document.getElementById("game");
+
+
+        if(
+            game &&
+            game.contains(e.target)
+        ){
+
+            return;
+
+        }
+
+
+        /*
+           Jangan mengganggu tombol music.
+        */
+
+        if(
+            e.target.closest("#musicBtn")
+        ){
+
+            restartAutoScroll(300);
+
+            return;
+
+        }
+
 
         clearTimeout(
             resumeTimer
         );
 
 
-        /*
-           Klik selesai dahulu,
-           kemudian langsung lanjut.
-        */
-
-        resumeTimer =
-            setTimeout(
-                function(){
-
-                    startAutoScroll();
-
-                },
-                80
-            );
+        restartAutoScroll(120);
 
     },
     true
@@ -4618,39 +4651,174 @@ if(
 
 
 /* =====================================================
-   TOUCH HP
+   TOUCH START
 ===================================================== */
 
+let touchStartY = 0;
+let touchMoving = false;
+
+
 document.addEventListener(
-    "touchend",
-  function(e){
+    "touchstart",
+    function(e){
 
         if(!isWebsiteOpened()){
 
             return;
 
         }
-/* JANGAN AUTO SCROLL JIKA MENYENTUH GAME */
-if(
-    document.getElementById("game") &&
-    document.getElementById("game").contains(e.target)
-){
-    return;
-}
+
+
+        /*
+           Jangan ganggu game.
+        */
+
+        const game =
+            document.getElementById("game");
+
+
+        if(
+            game &&
+            game.contains(e.target)
+        ){
+
+            return;
+
+        }
+
+
+        if(e.touches.length > 0){
+
+            touchStartY =
+                e.touches[0].clientY;
+
+        }
+
+
+        touchMoving = false;
+
+
+        stopAutoScroll();
+
+
+        clearTimeout(
+            resumeTimer
+        );
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =====================================================
+   TOUCH MOVE
+===================================================== */
+
+document.addEventListener(
+    "touchmove",
+    function(e){
+
+        if(!isWebsiteOpened()){
+
+            return;
+
+        }
+
+
+        const game =
+            document.getElementById("game");
+
+
+        if(
+            game &&
+            game.contains(e.target)
+        ){
+
+            return;
+
+        }
+
+
+        touchMoving = true;
+
+
+        /*
+           Auto-scroll berhenti ketika
+           user sedang swipe.
+        */
+
+        stopAutoScroll();
+
+
+        clearTimeout(
+            resumeTimer
+        );
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =====================================================
+   TOUCH END
+===================================================== */
+
+document.addEventListener(
+    "touchend",
+    function(e){
+
+        if(!isWebsiteOpened()){
+
+            return;
+
+        }
+
+
+        const game =
+            document.getElementById("game");
+
+
+        if(
+            game &&
+            game.contains(e.target)
+        ){
+
+            return;
+
+        }
+
 
         clearTimeout(
             resumeTimer
         );
 
 
+        /*
+           Setelah swipe selesai,
+           tunggu sebentar supaya posisi
+           halaman stabil.
+        */
+
         resumeTimer =
             setTimeout(
                 function(){
 
-                    startAutoScroll();
+                    if(
+                        !isGameRunning()
+                    ){
+
+                        startAutoScroll();
+
+                    }
 
                 },
-                80
+                touchMoving
+                    ? 700
+                    : 120
             );
 
     },
@@ -4661,7 +4829,7 @@ if(
 
 
 /* =====================================================
-   MOUSE WHEEL
+   MOUSE WHEEL — LAPTOP
 ===================================================== */
 
 window.addEventListener(
@@ -4669,6 +4837,13 @@ window.addEventListener(
     function(){
 
         if(!isWebsiteOpened()){
+
+            return;
+
+        }
+
+
+        if(isGameRunning()){
 
             return;
 
@@ -4688,49 +4863,9 @@ window.addEventListener(
 
 
         /*
-           Setelah berhenti 700ms,
-           auto-scroll kembali.
+           Setelah berhenti scroll,
+           auto-scroll dilanjutkan.
         */
-
-        resumeTimer =
-            setTimeout(
-                function(){
-
-                    startAutoScroll();
-
-                },
-                700
-            );
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-/* =====================================================
-   TOUCH MOVE
-===================================================== */
-
-window.addEventListener(
-    "touchmove",
-    function(){
-
-        if(!isWebsiteOpened()){
-
-            return;
-
-        }
-
-
-        stopAutoScroll();
-
-
-        clearTimeout(
-            resumeTimer
-        );
-
 
         resumeTimer =
             setTimeout(
@@ -4764,9 +4899,16 @@ window.addEventListener(
         }
 
 
+        if(isGameRunning()){
+
+            return;
+
+        }
+
+
         /*
-           Jika script sedang melakukan
-           auto-scroll, jangan hentikan.
+           Kalau auto-scroll sedang berjalan,
+           jangan restart terus-menerus.
         */
 
         if(autoScrollRunning){
@@ -4799,7 +4941,7 @@ window.addEventListener(
 
 
 /* =====================================================
-   TAB KEMBALI AKTIF
+   VISIBILITY CHANGE
 ===================================================== */
 
 document.addEventListener(
@@ -4811,20 +4953,220 @@ document.addEventListener(
             isWebsiteOpened()
         ){
 
-            clearTimeout(
-                resumeTimer
-            );
+            restartAutoScroll(400);
+
+        }
+
+    }
+);
 
 
-            resumeTimer =
-                setTimeout(
-                    function(){
+/* =====================================================
+   GAME START
+===================================================== */
 
-                        startAutoScroll();
+startGame.addEventListener(
+    "click",
+    function(){
 
-                    },
-                    300
+        /*
+           Pastikan auto-scroll benar-benar berhenti
+           ketika game dimulai.
+        */
+
+        stopAutoScroll();
+
+        clearTimeout(
+            resumeTimer
+        );
+
+    }
+);
+
+
+/* =====================================================
+   GAME SELESAI
+===================================================== */
+
+/*
+   Kita bungkus fungsi endHeartGame
+   supaya setelah game selesai,
+   auto-scroll bisa aktif lagi.
+*/
+
+const originalEndHeartGame =
+    endHeartGame;
+
+
+endHeartGame =
+    function(won){
+
+        originalEndHeartGame(won);
+
+
+        /*
+           Tunggu result muncul.
+        */
+
+        setTimeout(
+            function(){
+
+                if(
+                    isWebsiteOpened()
+                ){
+
+                    /*
+                       Auto-scroll tidak langsung
+                       berjalan agar user bisa melihat
+                       hasil game terlebih dahulu.
+                    */
+
+                    restartAutoScroll(2500);
+
+                }
+
+            },
+            100
+        );
+
+    };
+
+
+/* =====================================================
+   NEXT STORY
+===================================================== */
+
+nextStory.addEventListener(
+    "click",
+    function(){
+
+        /*
+           Modal terbuka,
+           hentikan auto-scroll halaman.
+        */
+
+        stopAutoScroll();
+
+    }
+);
+
+
+/* =====================================================
+   OPEN FINAL STORY
+===================================================== */
+
+document
+    .getElementById("openFinal")
+    .addEventListener(
+        "click",
+        function(){
+
+            stopAutoScroll();
+
+        }
+    );
+
+
+/* =====================================================
+   CLOSE FINAL
+===================================================== */
+
+const oldCloseFinal =
+    window.closeFinal;
+
+
+window.closeFinal =
+    function(){
+
+        document
+            .getElementById("finalStory")
+            .classList
+            .remove("show");
+
+
+        /*
+           Setelah modal ditutup,
+           lanjutkan auto-scroll.
+        */
+
+        restartAutoScroll(500);
+
+    };
+
+
+/* =====================================================
+   CLOSE STORY DENGAN KLIK LUAR
+===================================================== */
+
+document
+    .getElementById("story")
+    .addEventListener(
+        "click",
+        function(e){
+
+            if(
+                e.target === this
+            ){
+
+                this.classList.remove(
+                    "show"
                 );
+
+
+                restartAutoScroll(500);
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById("finalStory")
+    .addEventListener(
+        "click",
+        function(e){
+
+            if(
+                e.target === this
+            ){
+
+                this.classList.remove(
+                    "show"
+                );
+
+
+                restartAutoScroll(500);
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Escape"){
+
+            document
+                .getElementById("story")
+                .classList
+                .remove("show");
+
+
+            document
+                .getElementById("finalStory")
+                .classList
+                .remove("show");
+
+
+            restartAutoScroll(500);
 
         }
 
@@ -4840,15 +5182,17 @@ window.addEventListener(
     "resize",
     function(){
 
-        if(window.innerWidth <= 750){
+        if(
+            window.innerWidth <= 750
+        ){
 
             autoScrollSpeed =
-                0.52;
+                0.75;
 
         }else{
 
             autoScrollSpeed =
-                0.72;
+                0.90;
 
         }
 
@@ -4865,29 +5209,20 @@ window.addEventListener(
     function(){
 
         /*
-           Biasanya intro masih terbuka,
-           jadi fungsi ini hanya aktif
-           jika intro sudah dilewati.
+           Jangan langsung scroll ketika intro masih
+           terbuka.
         */
 
-        if(isWebsiteOpened()){
+        if(
+            isWebsiteOpened()
+        ){
 
-            setTimeout(
-                function(){
-
-                    startAutoScroll();
-
-                },
-                800
-            );
+            restartAutoScroll(800);
 
         }
 
     }
 );
 
-</script>
-
 </body>
 </html>
-
