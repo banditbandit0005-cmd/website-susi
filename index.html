@@ -3674,19 +3674,7 @@ function startHeartGame(){
        Smooth tetapi tidak terlalu lama.
     */
 
-    setTimeout(
-        function(){
-
-            document
-                .getElementById("game")
-                .scrollIntoView({
-                    behavior:"smooth",
-                    block:"center"
-                });
-
-        },
-        200
-    );
+  
 
 }
 
@@ -4407,7 +4395,12 @@ function autoScrollLoop(){
 
     }
 
-
+/* JANGAN AUTO SCROLL SAAT GAME BERJALAN */
+if(gameRunning){
+    autoScrollRunning = false;
+    autoScrollRAF = null;
+    return;
+}
     const maxScroll =
         document.documentElement.scrollHeight -
         window.innerHeight;
@@ -4584,14 +4577,20 @@ openBtn.addEventListener(
 
 document.addEventListener(
     "click",
-    function(){
+    function(e){
 
         if(!isWebsiteOpened()){
 
             return;
 
         }
-
+ /* JANGAN AUTO SCROLL JIKA KLIK DI DALAM GAME */
+if(
+    document.getElementById("game") &&
+    document.getElementById("game").contains(e.target)
+){
+    return;
+}
 
         clearTimeout(
             resumeTimer
@@ -4624,14 +4623,20 @@ document.addEventListener(
 
 document.addEventListener(
     "touchend",
-    function(){
+  function(e){
 
         if(!isWebsiteOpened()){
 
             return;
 
         }
-
+/* JANGAN AUTO SCROLL JIKA MENYENTUH GAME */
+if(
+    document.getElementById("game") &&
+    document.getElementById("game").contains(e.target)
+){
+    return;
+}
 
         clearTimeout(
             resumeTimer
