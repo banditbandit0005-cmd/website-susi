@@ -3575,9 +3575,32 @@ startGame.addEventListener(
 
 function startHeartGame(){
 
+    stopAutoScroll();
+
     gameScreen.classList.add("active");
 
     gameResult.classList.remove("show");
+
+
+    setTimeout(function(){
+
+        gameScreen.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+    }, 50);
+
+
+    heartsCaught = 0;
+    gameScore = 0;
+    combo = 0;
+    timeLeft = 30;
+
+    gameRunning = true;
+
+    // lanjutkan kode game kamu...
+}
 
     heartsCaught = 0;
     gameScore = 0;
