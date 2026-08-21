@@ -25,6 +25,7 @@
 
 html{
     scroll-behavior:smooth;
+    scroll-padding-top:20px;
 }
 
 body{
@@ -32,6 +33,10 @@ body{
     color:#fff;
     font-family:"DM Sans",sans-serif;
     overflow-x:hidden;
+
+    /* Optimasi scroll HP */
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-y:auto;
 }
 
 button{
@@ -4334,22 +4339,21 @@ document.addEventListener(
 
 
 /* =====================================================
-   AUTO SCROLL FIX
-   HP + LAPTOP
+   AUTO SCROLL PREMIUM
+   HALUS + LEBIH CEPAT + RESPONSIF HP/LAPTOP
 ===================================================== */
 
 let autoScrollRunning = false;
 let autoScrollRAF = null;
 let resumeTimer = null;
 
-let autoScrollSpeed =
-    window.innerWidth <= 750
-        ? 0.65
-        : 0.85;
+let autoScrollSpeed = window.innerWidth <= 750
+    ? 1.15
+    : 1.35;
 
 
 /* =====================================================
-   CEK INTRO
+   CEK WEBSITE SUDAH DIBUKA
 ===================================================== */
 
 function isWebsiteOpened(){
@@ -4366,14 +4370,17 @@ function isWebsiteOpened(){
 
 
 /* =====================================================
-   START
+   START AUTO SCROLL
 ===================================================== */
 
 function startAutoScroll(){
 
     if(!isWebsiteOpened()) return;
 
-    if(typeof gameRunning !== "undefined" && gameRunning){
+    if(
+        typeof gameRunning !== "undefined" &&
+        gameRunning
+    ){
         return;
     }
 
@@ -4388,7 +4395,7 @@ function startAutoScroll(){
 
 
 /* =====================================================
-   LOOP
+   AUTO SCROLL LOOP
 ===================================================== */
 
 function autoScrollLoop(){
@@ -4396,15 +4403,12 @@ function autoScrollLoop(){
     if(!autoScrollRunning){
 
         autoScrollRAF = null;
-
         return;
 
     }
 
 
-    /*
-       Jangan scroll saat game dimainkan.
-    */
+    /* Jangan scroll saat game dimainkan */
 
     if(
         typeof gameRunning !== "undefined" &&
@@ -4412,7 +4416,6 @@ function autoScrollLoop(){
     ){
 
         stopAutoScroll();
-
         return;
 
     }
@@ -4423,34 +4426,41 @@ function autoScrollLoop(){
         window.innerHeight;
 
 
+    /* Sampai paling bawah */
+
     if(
         maxScroll <= 0 ||
         window.scrollY >= maxScroll - 2
     ){
 
         stopAutoScroll();
-
         return;
 
     }
 
 
-    window.scrollBy(
-        0,
-        autoScrollSpeed
-    );
+    /*
+       Scroll lebih halus menggunakan
+       requestAnimationFrame.
+    */
+
+    window.scrollTo({
+        top: Math.min(
+            window.scrollY + autoScrollSpeed,
+            maxScroll
+        ),
+        behavior: "instant"
+    });
 
 
     autoScrollRAF =
-        requestAnimationFrame(
-            autoScrollLoop
-        );
+        requestAnimationFrame(autoScrollLoop);
 
 }
 
 
 /* =====================================================
-   STOP
+   STOP AUTO SCROLL
 ===================================================== */
 
 function stopAutoScroll(){
@@ -4472,22 +4482,19 @@ function stopAutoScroll(){
 
 
 /* =====================================================
-   RESUME
+   RESUME AUTO SCROLL
 ===================================================== */
 
-function resumeAutoScroll(delay){
+function resumeAutoScroll(delay = 400){
 
     clearTimeout(resumeTimer);
 
     resumeTimer =
-        setTimeout(
-            function(){
+        setTimeout(function(){
 
-                startAutoScroll();
+            startAutoScroll();
 
-            },
-            delay
-        );
+        }, delay);
 
 }
 
@@ -4496,35 +4503,29 @@ function resumeAutoScroll(delay){
    OPEN YOUR LETTER
 ===================================================== */
 
-/*
-   TIDAK mengganti event Open Your Letter
-   yang sudah kamu punya.
-
-   Hanya menunggu intro hilang,
-   lalu mulai auto-scroll.
-*/
-
 openBtn.addEventListener(
     "click",
     function(){
 
         clearTimeout(resumeTimer);
 
-        setTimeout(
-            function(){
+        /*
+           Tunggu animasi intro selesai,
+           kemudian langsung mulai scroll.
+        */
 
-                startAutoScroll();
+        setTimeout(function(){
 
-            },
-            1000
-        );
+            startAutoScroll();
+
+        }, 900);
 
     }
 );
 
 
 /* =====================================================
-   KLIK
+   KLIK DI HALAMAN
 ===================================================== */
 
 document.addEventListener(
@@ -4535,7 +4536,8 @@ document.addEventListener(
 
 
         /*
-           Jangan mengganggu game.
+           Semua klik di dalam game
+           tidak mengganggu auto-scroll.
         */
 
         const game =
@@ -4551,7 +4553,9 @@ document.addEventListener(
         }
 
 
-        resumeAutoScroll(150);
+        stopAutoScroll();
+
+        resumeAutoScroll(450);
 
     },
     true
@@ -4562,16 +4566,11 @@ document.addEventListener(
    TOUCH HP
 ===================================================== */
 
-let isTouching = false;
-
-
 window.addEventListener(
     "touchstart",
     function(){
 
         if(!isWebsiteOpened()) return;
-
-        isTouching = true;
 
         stopAutoScroll();
 
@@ -4590,9 +4589,7 @@ window.addEventListener(
 
         if(!isWebsiteOpened()) return;
 
-        isTouching = false;
-
-        resumeAutoScroll(700);
+        resumeAutoScroll(600);
 
     },
     {
@@ -4602,7 +4599,7 @@ window.addEventListener(
 
 
 /* =====================================================
-   MOUSE WHEEL LAPTOP
+   MOUSE WHEEL
 ===================================================== */
 
 window.addEventListener(
@@ -4613,7 +4610,7 @@ window.addEventListener(
 
         stopAutoScroll();
 
-        resumeAutoScroll(700);
+        resumeAutoScroll(600);
 
     },
     {
@@ -4653,32 +4650,11 @@ window.addEventListener(
 
         autoScrollSpeed =
             window.innerWidth <= 750
-                ? 0.65
-                : 0.85;
+                ? 1.15
+                : 1.35;
 
     }
 );
-
-
-/* =====================================================
-   SETELAH GAME SELESAI
-===================================================== */
-
-function continueAutoScrollAfterGame(){
-
-    clearTimeout(resumeTimer);
-
-    resumeTimer =
-        setTimeout(
-            function(){
-
-                startAutoScroll();
-
-            },
-            1500
-        );
-
-}
 </script>
 
 </body>
