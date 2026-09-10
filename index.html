@@ -25,7 +25,6 @@
 
 html{
     scroll-behavior:smooth;
-    scroll-padding-top:20px;
 }
 
 body{
@@ -33,10 +32,6 @@ body{
     color:#fff;
     font-family:"DM Sans",sans-serif;
     overflow-x:hidden;
-
-    /* Optimasi scroll HP */
-    -webkit-overflow-scrolling:touch;
-    overscroll-behavior-y:auto;
 }
 
 button{
@@ -71,11 +66,13 @@ button{
             rgba(120,25,45,.38),
             transparent 28%
         ),
+
         radial-gradient(
             circle at 80% 75%,
             rgba(200,155,70,.12),
             transparent 25%
         ),
+
         linear-gradient(
             145deg,
             #070102,
@@ -114,16 +111,21 @@ button{
     top:-60px;
     font-size:18px;
     opacity:.7;
-    animation:fall linear forwards;
+
+    animation:
+        fall linear forwards;
 }
 
 @keyframes fall{
+
     to{
         transform:
             translate3d(var(--x),110vh,0)
             rotate(720deg);
+
         opacity:0;
     }
+
 }
 
 
@@ -172,14 +174,29 @@ button{
 
 .intro-script{
     margin-top:25px;
+
     font-family:"Great Vibes";
-    font-size:clamp(65px,12vw,125px);
+
+    font-size:
+        clamp(
+            65px,
+            12vw,
+            125px
+        );
+
     color:#efd69c;
 }
 
 .intro-title{
     font-family:"Cormorant Garamond";
-    font-size:clamp(45px,8vw,90px);
+
+    font-size:
+        clamp(
+            45px,
+            8vw,
+            90px
+        );
+
     font-weight:400;
     letter-spacing:3px;
 }
@@ -187,7 +204,9 @@ button{
 .intro-text{
     max-width:650px;
     margin:25px auto;
+
     color:#d7c6c3;
+
     font-size:15px;
     line-height:1.9;
 }
@@ -196,13 +215,25 @@ button{
 .proposal-btn,
 .game-start,
 .secret-btn{
+
     margin-top:20px;
-    padding:14px 28px;
+
+    padding:
+        14px 28px;
+
     border-radius:50px;
-    border:1px solid rgba(239,214,156,.6);
-    background:rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        rgba(239,214,156,.6);
+
+    background:
+        rgba(255,255,255,.04);
+
     color:#f0d99e;
+
     cursor:pointer;
+
     transition:.4s;
 }
 
@@ -210,9 +241,15 @@ button{
 .proposal-btn:hover,
 .game-start:hover,
 .secret-btn:hover{
+
     background:#711d2d;
-    transform:translateY(-4px);
-    box-shadow:0 15px 50px rgba(0,0,0,.4);
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.4);
 }
 
 
@@ -221,27 +258,31 @@ button{
 ===================================================== */
 
 #musicBtn{
+
     position:fixed;
+
     top:25px;
     right:25px;
+
     z-index:200;
 
-    padding:12px 18px;
-    border-radius:50px;
-    border:1px solid rgba(239,214,156,.5);
+    padding:
+        12px 18px;
 
-    background:rgba(15,4,7,.75);
+    border-radius:50px;
+
+    border:
+        1px solid
+        rgba(239,214,156,.5);
+
+    background:
+        rgba(15,4,7,.75);
+
     backdrop-filter:blur(15px);
 
     color:#f0d99e;
+
     cursor:pointer;
-
-    transition:.3s ease;
-}
-
-#musicBtn:hover{
-    transform:translateY(-2px);
-    background:rgba(90,20,35,.9);
 }
 
 
@@ -250,21 +291,28 @@ button{
 ===================================================== */
 
 .hero{
+
     min-height:100svh;
+
     position:relative;
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
     text-align:center;
+
     overflow:hidden;
 
-    padding:100px 20px;
+    padding:
+        100px 20px;
 }
 
 .hero::before{
+
     content:"";
+
     position:absolute;
 
     width:700px;
@@ -272,69 +320,115 @@ button{
 
     border-radius:50%;
 
-    border:1px solid rgba(239,214,156,.10);
+    border:
+        1px solid
+        rgba(239,214,156,.10);
 
     box-shadow:
-        0 0 100px rgba(239,214,156,.04),
-        inset 0 0 100px rgba(239,214,156,.03);
+        0 0 100px
+        rgba(239,214,156,.04),
+
+        inset 0 0 100px
+        rgba(239,214,156,.03);
 }
 
 .hero-content{
+
     position:relative;
+
     z-index:3;
+
     max-width:1000px;
 }
 
 .eyebrow{
+
     color:var(--gold-light);
+
     font-size:11px;
+
     letter-spacing:5px;
+
     text-transform:uppercase;
 }
 
 .hero h1{
-    margin:35px 0;
+
+    margin:
+        35px 0;
+
     font-family:"Cormorant Garamond";
-    font-size:clamp(75px,15vw,170px);
+
+    font-size:
+        clamp(
+            75px,
+            15vw,
+            170px
+        );
+
     line-height:.65;
+
     font-weight:400;
 }
 
 .hero h1 span{
+
     display:block;
+
     font-family:"Great Vibes";
+
     color:#e7c983;
+
     font-size:.65em;
+
     line-height:1.5;
 }
 
 .hero-description{
+
     max-width:700px;
+
     margin:auto;
+
     color:#d4c3c0;
+
     line-height:1.9;
+
     font-size:15px;
 }
 
 .hero-date{
+
     margin-top:35px;
+
     color:#e6ca89;
+
     letter-spacing:5px;
+
     font-size:13px;
 }
 
 .hero-love{
+
     margin-top:15px;
+
     font-family:"Great Vibes";
+
     font-size:30px;
+
     color:#e4c57c;
 }
 
 .scroll{
+
     margin-top:60px;
+
     color:#a9908f;
+
     font-size:10px;
+
     letter-spacing:4px;
+
     text-transform:uppercase;
 }
 
@@ -344,15 +438,19 @@ button{
 ===================================================== */
 
 .hero-photo{
+
     position:relative;
 
     width:190px;
     height:240px;
 
-    margin:25px auto 35px;
+    margin:
+        25px auto 35px;
+
     padding:7px;
 
-    border-radius:110px 110px 35px 35px;
+    border-radius:
+        110px 110px 35px 35px;
 
     background:
         linear-gradient(
@@ -364,42 +462,68 @@ button{
         );
 
     box-shadow:
-        0 0 0 1px rgba(241,217,155,.25),
-        0 20px 60px rgba(0,0,0,.5),
-        0 0 60px rgba(145,40,65,.25);
 
-    animation:photoFloat 4s ease-in-out infinite;
+        0 0 0 1px
+        rgba(241,217,155,.25),
+
+        0 20px 60px
+        rgba(0,0,0,.5),
+
+        0 0 60px
+        rgba(145,40,65,.25);
+
+    animation:
+        photoFloat 4s
+        ease-in-out infinite;
+
     z-index:3;
 }
 
 .hero-photo img{
+
     width:100%;
     height:100%;
+
     display:block;
+
     object-fit:cover;
+
     object-position:center;
 
-    border-radius:103px 103px 28px 28px;
+    border-radius:
+        103px 103px 28px 28px;
 
-    border:2px solid rgba(255,248,230,.7);
+    border:
+        2px solid
+        rgba(255,248,230,.7);
 
-    filter:saturate(1.05) contrast(1.03);
+    filter:
+        saturate(1.05)
+        contrast(1.03);
 }
 
 .hero-photo::before{
+
     content:"";
+
     position:absolute;
+
     inset:-8px;
 
-    border-radius:118px 118px 43px 43px;
+    border-radius:
+        118px 118px 43px 43px;
 
-    border:1px solid rgba(239,214,156,.35);
+    border:
+        1px solid
+        rgba(239,214,156,.35);
 }
 
 .hero-photo::after{
+
     content:"♡";
 
     position:absolute;
+
     right:-13px;
     bottom:18px;
 
@@ -407,6 +531,7 @@ button{
     height:42px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -414,17 +539,25 @@ button{
 
     background:#651b2a;
 
-    border:1px solid rgba(239,214,156,.6);
+    border:
+        1px solid
+        rgba(239,214,156,.6);
 
     color:#f1d99b;
+
     font-size:21px;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.45);
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.45);
 }
 
 .hero-photo-glow{
+
     position:absolute;
+
     inset:-30px;
+
     z-index:-1;
 
     border-radius:50%;
@@ -440,13 +573,19 @@ button{
 }
 
 @keyframes photoFloat{
+
     0%,100%{
-        transform:translateY(0) rotate(-1deg);
+        transform:
+            translateY(0)
+            rotate(-1deg);
     }
 
     50%{
-        transform:translateY(-10px) rotate(1deg);
+        transform:
+            translateY(-10px)
+            rotate(1deg);
     }
+
 }
 
 
@@ -459,12 +598,14 @@ section{
 }
 
 .light{
+
     background:
         radial-gradient(
             circle at 15% 15%,
             rgba(199,161,90,.10),
             transparent 25%
         ),
+
         linear-gradient(
             180deg,
             #f7ecdf,
@@ -475,35 +616,53 @@ section{
 }
 
 .section-head{
+
     max-width:850px;
-    margin:0 auto 65px;
+
+    margin:
+        0 auto 65px;
+
     text-align:center;
 }
 
 .section-head h2{
+
     margin-top:20px;
 
-    font-family:"Cormorant Garamond";
+    font-family:
+        "Cormorant Garamond";
 
-    font-size:clamp(60px,9vw,110px);
+    font-size:
+        clamp(
+            60px,
+            9vw,
+            110px
+        );
 
     font-weight:400;
+
     line-height:.75;
 }
 
 .section-head p{
+
     max-width:650px;
+
     margin:30px auto;
 
     color:#80696b;
+
     line-height:1.9;
 }
 
 .divider{
+
     margin-top:30px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     gap:15px;
@@ -513,10 +672,15 @@ section{
 
 .divider::before,
 .divider::after{
+
     content:"";
+
     width:70px;
+
     height:1px;
-    background:var(--gold);
+
+    background:
+        var(--gold);
 }
 
 
@@ -525,49 +689,68 @@ section{
 ===================================================== */
 
 .birthday{
+
     max-width:1050px;
+
     margin:auto;
-    padding:70px 8%;
+
+    padding:
+        70px 8%;
 
     text-align:center;
 
-    background:rgba(255,255,255,.55);
+    background:
+        rgba(255,255,255,.55);
 
-    border:1px solid rgba(92,45,47,.16);
+    border:
+        1px solid
+        rgba(92,45,47,.16);
 
     box-shadow:
-        0 35px 90px rgba(57,22,27,.15);
+        0 35px 90px
+        rgba(57,22,27,.15);
 }
 
 .cake{
+
     font-size:65px;
 
     animation:
-        float 3s ease-in-out infinite;
+        float 3s
+        ease-in-out infinite;
 }
 
 @keyframes float{
+
     50%{
-        transform:translateY(-8px);
+        transform:
+            translateY(-8px);
     }
+
 }
 
 .birthday h3{
+
     margin:20px 0;
 
-    font-family:"Great Vibes";
+    font-family:
+        "Great Vibes";
 
     font-size:60px;
+
     font-weight:400;
 
     color:#651d2a;
 }
 
 .birthday p{
+
     max-width:700px;
+
     margin:auto;
 
     color:#80696b;
+
     line-height:1.9;
 }
 
@@ -577,38 +760,57 @@ section{
 ===================================================== */
 
 .letter-section{
+
     background:#e6d7c8;
+
     color:#35151a;
 }
 
 .letter{
+
     max-width:900px;
+
     margin:auto;
 
-    padding:clamp(40px,8vw,85px);
+    padding:
+        clamp(
+            40px,
+            8vw,
+            85px
+        );
 
     background:#fffdf8;
 
     box-shadow:
-        0 40px 100px rgba(50,20,23,.20);
+        0 40px 100px
+        rgba(50,20,23,.20);
 
     position:relative;
 }
 
 .letter::before{
+
     content:"";
+
     position:absolute;
+
     inset:18px;
 
-    border:1px solid rgba(199,161,90,.35);
+    border:
+        1px solid
+        rgba(199,161,90,.35);
 }
 
 .letter-content{
+
     position:relative;
 }
 
 .letter-script{
-    font-family:"Great Vibes";
+
+    font-family:
+        "Great Vibes";
+
     color:#651d2a;
 
     font-size:65px;
@@ -617,9 +819,12 @@ section{
 }
 
 .letter p{
-    font-family:"Cormorant Garamond";
+
+    font-family:
+        "Cormorant Garamond";
 
     font-size:20px;
+
     line-height:1.9;
 
     color:#4b393a;
@@ -634,12 +839,16 @@ section{
 }
 
 .signature{
+
     margin-top:40px;
+
     text-align:right;
 
-    font-family:"Great Vibes";
+    font-family:
+        "Great Vibes";
 
     color:#651d2a;
+
     font-size:40px;
 }
 
@@ -649,6 +858,7 @@ section{
 ===================================================== */
 
 .gallery{
+
     background:
         linear-gradient(
             180deg,
@@ -660,50 +870,70 @@ section{
 }
 
 .gallery-grid{
+
     max-width:1200px;
+
     margin:auto;
 
     display:grid;
 
-    grid-template-columns:1.3fr .7fr;
-    grid-template-rows:430px 430px;
+    grid-template-columns:
+        1.3fr .7fr;
+
+    grid-template-rows:
+        430px 430px;
 
     gap:20px;
 }
 
 .photo-card{
+
     position:relative;
+
     overflow:hidden;
 
     background:#250b11;
 
     box-shadow:
-        0 30px 80px rgba(54,20,26,.18);
+        0 30px 80px
+        rgba(54,20,26,.18);
 }
 
 .photo-card:first-child{
     grid-row:span 2;
 }
 
-.photo-card img,
-.photo-card video{
+.photo-card img{
+
     width:100%;
     height:100%;
 
     object-fit:cover;
-    display:block;
 
+    transition:
+        1.2s ease;
+}
+
+.photo-card:hover img{
+    transform:scale(1.08);
+}
+.photo-card video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
     transition:1.2s ease;
 }
 
-.photo-card:hover img,
 .photo-card:hover video{
     transform:scale(1.08);
 }
-
 .photo-card::after{
+
     content:"";
+
     position:absolute;
+
     inset:0;
 
     background:
@@ -714,24 +944,32 @@ section{
 }
 
 .photo-info{
+
     position:absolute;
+
     z-index:2;
 
     left:30px;
+
     bottom:25px;
 
     color:white;
 }
 
 .photo-info small{
+
     color:#e8cb8b;
+
     letter-spacing:4px;
 }
 
 .photo-info h3{
-    font-family:"Cormorant Garamond";
+
+    font-family:
+        "Cormorant Garamond";
 
     font-size:45px;
+
     font-weight:400;
 }
 
@@ -753,42 +991,55 @@ section{
 }
 
 .reason-grid{
+
     max-width:1100px;
+
     margin:auto;
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+        repeat(2,1fr);
 
     gap:18px;
 }
 
 .reason{
+
     padding:35px;
 
-    border:1px solid rgba(239,214,156,.15);
+    border:
+        1px solid
+        rgba(239,214,156,.15);
 
-    background:rgba(255,255,255,.025);
+    background:
+        rgba(255,255,255,.025);
 
     transition:.4s;
 }
 
 .reason:hover{
-    transform:translateY(-5px);
+
+    transform:
+        translateY(-5px);
 
     border-color:
         rgba(239,214,156,.45);
 }
 
 .reason small{
+
     color:#d6b66f;
+
     letter-spacing:4px;
 }
 
 .reason h3{
+
     margin:10px 0;
 
-    font-family:"Cormorant Garamond";
+    font-family:
+        "Cormorant Garamond";
 
     font-size:40px;
 
@@ -798,7 +1049,9 @@ section{
 }
 
 .reason p{
+
     color:#a99191;
+
     line-height:1.8;
 }
 
@@ -808,14 +1061,17 @@ section{
 ===================================================== */
 
 .game-section{
+
     min-height:100svh;
 
     background:
+
         radial-gradient(
             circle at 50% 20%,
             rgba(140,28,52,.30),
             transparent 30%
         ),
+
         linear-gradient(
             180deg,
             #0b0305,
@@ -831,33 +1087,49 @@ section{
 }
 
 .game-box{
+
     max-width:1050px;
+
     margin:auto;
+
     text-align:center;
 }
 
 .game-intro{
+
     max-width:700px;
-    margin:0 auto 35px;
+
+    margin:
+        0 auto 35px;
 }
 
 .game-intro h2{
+
     margin:20px 0;
 
-    font-family:"Cormorant Garamond";
+    font-family:
+        "Cormorant Garamond";
 
-    font-size:clamp(55px,8vw,95px);
+    font-size:
+        clamp(
+            55px,
+            8vw,
+            95px
+        );
 
     font-weight:400;
+
     line-height:.8;
 
     color:#f1dfb4;
 }
 
 .game-intro h2 span{
+
     display:block;
 
-    font-family:"Great Vibes";
+    font-family:
+        "Great Vibes";
 
     color:#e8c785;
 
@@ -867,6 +1139,7 @@ section{
 }
 
 .game-intro p{
+
     color:#bda9a8;
 
     line-height:1.9;
@@ -880,12 +1153,14 @@ section{
 
 
 /* =====================================================
-   GAME SCREEN
+   NEW GAME SCREEN
 ===================================================== */
 
 .game-screen{
     display:none;
-    animation:gameAppear .8s ease;
+
+    animation:
+        gameAppear .8s ease;
 }
 
 .game-screen.active{
@@ -893,6 +1168,7 @@ section{
 }
 
 @keyframes gameAppear{
+
     from{
         opacity:0;
 
@@ -903,17 +1179,26 @@ section{
 
     to{
         opacity:1;
+
         transform:none;
     }
+
 }
 
+
+/* GAME HEADER */
+
 .game-message{
+
     min-height:100px;
+
     margin-bottom:20px;
 }
 
 .game-message h3{
-    font-family:"Cormorant Garamond";
+
+    font-family:
+        "Cormorant Garamond";
 
     font-size:38px;
 
@@ -923,15 +1208,23 @@ section{
 }
 
 .game-message p{
+
     color:#bda9a8;
+
     margin-top:8px;
+
     line-height:1.7;
 }
 
+
+/* GAME STATS */
+
 .game-stats{
+
     max-width:700px;
 
-    margin:0 auto 25px;
+    margin:
+        0 auto 25px;
 
     display:flex;
 
@@ -943,18 +1236,24 @@ section{
 }
 
 .stat{
+
     min-width:130px;
 
-    padding:12px 18px;
+    padding:
+        12px 18px;
 
-    border:1px solid rgba(239,214,156,.15);
+    border:
+        1px solid
+        rgba(239,214,156,.15);
 
-    background:rgba(255,255,255,.035);
+    background:
+        rgba(255,255,255,.035);
 
     border-radius:15px;
 }
 
 .stat small{
+
     display:block;
 
     color:#9f898a;
@@ -965,7 +1264,9 @@ section{
 }
 
 .stat strong{
+
     color:#efd69c;
+
     font-size:18px;
 }
 
@@ -975,6 +1276,7 @@ section{
 ===================================================== */
 
 .heart-game-area{
+
     position:relative;
 
     width:min(760px,100%);
@@ -987,14 +1289,18 @@ section{
 
     overflow:hidden;
 
-    border:1px solid rgba(239,214,156,.30);
+    border:
+        1px solid
+        rgba(239,214,156,.30);
 
     background:
+
         radial-gradient(
             circle at 50% 50%,
             rgba(125,30,52,.28),
             transparent 55%
         ),
+
         linear-gradient(
             145deg,
             rgba(93,20,38,.70),
@@ -1002,11 +1308,19 @@ section{
         );
 
     box-shadow:
-        inset 0 0 70px rgba(0,0,0,.55),
-        0 30px 90px rgba(0,0,0,.35);
+
+        inset 0 0 70px
+        rgba(0,0,0,.55),
+
+        0 30px 90px
+        rgba(0,0,0,.35);
 }
 
+
+/* DECORATIVE CIRCLES */
+
 .heart-game-area::before{
+
     content:"";
 
     position:absolute;
@@ -1019,32 +1333,44 @@ section{
     left:50%;
     top:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    border:1px solid rgba(239,214,156,.08);
+    border:
+        1px solid
+        rgba(239,214,156,.08);
 
     box-shadow:
-        0 0 100px rgba(239,214,156,.04);
+        0 0 100px
+        rgba(239,214,156,.04);
 }
 
 .heart-game-area::after{
+
     content:"✦     ♡     ✦";
 
     position:absolute;
 
     left:50%;
+
     bottom:15px;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    color:rgba(239,214,156,.22);
+    color:
+        rgba(239,214,156,.22);
 
     font-size:13px;
 
     letter-spacing:15px;
 }
 
+
+/* HEART */
+
 .target-heart{
+
     position:absolute;
 
     width:72px;
@@ -1075,7 +1401,9 @@ section{
 }
 
 .target-heart:hover{
-    transform:scale(1.25);
+
+    transform:
+        scale(1.25);
 
     filter:
         drop-shadow(
@@ -1085,6 +1413,7 @@ section{
 }
 
 @keyframes targetFloat{
+
     0%,100%{
         margin-top:0;
     }
@@ -1094,7 +1423,11 @@ section{
     }
 }
 
+
+/* CLICK EFFECT */
+
 .click-effect{
+
     position:absolute;
 
     pointer-events:none;
@@ -1103,7 +1436,8 @@ section{
 
     color:#f1d99b;
 
-    font-family:"Great Vibes";
+    font-family:
+        "Great Vibes";
 
     font-size:28px;
 
@@ -1113,6 +1447,7 @@ section{
 }
 
 @keyframes clickUp{
+
     from{
         opacity:1;
 
@@ -1130,7 +1465,11 @@ section{
     }
 }
 
+
+/* GAME BOTTOM */
+
 .game-bottom{
+
     margin-top:25px;
 
     color:#927e7f;
@@ -1150,22 +1489,29 @@ section{
 ===================================================== */
 
 .game-result{
+
     display:none;
 
     max-width:800px;
 
-    margin:45px auto 0;
+    margin:
+        45px auto 0;
 
-    padding:50px 30px;
+    padding:
+        50px 30px;
 
-    border:1px solid rgba(239,214,156,.25);
+    border:
+        1px solid
+        rgba(239,214,156,.25);
 
     background:
+
         radial-gradient(
             circle at center,
             rgba(120,30,50,.22),
             transparent 65%
         ),
+
         rgba(255,255,255,.025);
 
     animation:
@@ -1177,18 +1523,24 @@ section{
 }
 
 @keyframes resultAppear{
+
     from{
         opacity:0;
-        transform:scale(.9);
+
+        transform:
+            scale(.9);
     }
 
     to{
         opacity:1;
-        transform:scale(1);
+
+        transform:
+            scale(1);
     }
 }
 
 .result-heart{
+
     font-size:80px;
 
     animation:
@@ -1196,6 +1548,7 @@ section{
 }
 
 @keyframes heartbeat{
+
     0%,100%{
         transform:scale(1);
     }
@@ -1203,12 +1556,15 @@ section{
     50%{
         transform:scale(1.15);
     }
+
 }
 
 .game-result h3{
+
     margin:20px 0;
 
-    font-family:"Great Vibes";
+    font-family:
+        "Great Vibes";
 
     font-size:65px;
 
@@ -1218,6 +1574,7 @@ section{
 }
 
 .game-result p{
+
     max-width:650px;
 
     margin:15px auto;
@@ -1228,13 +1585,17 @@ section{
 }
 
 .next-btn{
+
     margin-top:20px;
 
-    padding:14px 28px;
+    padding:
+        14px 28px;
 
     border-radius:50px;
 
-    border:1px solid rgba(239,214,156,.55);
+    border:
+        1px solid
+        rgba(239,214,156,.55);
 
     background:#651b2a;
 
@@ -1249,6 +1610,7 @@ section{
 ===================================================== */
 
 .story{
+
     position:fixed;
 
     inset:0;
@@ -1263,12 +1625,15 @@ section{
 
     padding:25px;
 
-    background:rgba(5,1,3,.88);
+    background:
+        rgba(5,1,3,.88);
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:
+        blur(15px);
 }
 
 .story.show{
+
     display:flex;
 
     animation:
@@ -1276,6 +1641,7 @@ section{
 }
 
 @keyframes fadeIn{
+
     from{
         opacity:0;
     }
@@ -1286,50 +1652,67 @@ section{
 }
 
 .story-box{
+
     width:min(850px,100%);
 
     max-height:90vh;
 
     overflow:auto;
 
-    padding:clamp(35px,7vw,75px);
+    padding:
+        clamp(
+            35px,
+            7vw,
+            75px
+        );
 
     text-align:center;
 
     background:
+
         radial-gradient(
             circle at 50% 0,
             rgba(126,31,51,.3),
             transparent 40%
         ),
+
         #160609;
 
-    border:1px solid rgba(239,214,156,.3);
+    border:
+        1px solid
+        rgba(239,214,156,.3);
 
     box-shadow:
-        0 30px 100px rgba(0,0,0,.6);
+        0 30px 100px
+        rgba(0,0,0,.6);
 
     position:relative;
 }
 
 .story-box::before{
+
     content:"";
 
     position:absolute;
 
     inset:14px;
 
-    border:1px solid rgba(239,214,156,.12);
+    border:
+        1px solid
+        rgba(239,214,156,.12);
 
     pointer-events:none;
 }
 
 .story-content{
+
     position:relative;
+
     z-index:2;
 }
 
 .story-small{
+
     color:#d7b968;
 
     font-size:10px;
@@ -1340,11 +1723,18 @@ section{
 }
 
 .story-title{
+
     margin:20px 0;
 
-    font-family:"Cormorant Garamond";
+    font-family:
+        "Cormorant Garamond";
 
-    font-size:clamp(42px,7vw,75px);
+    font-size:
+        clamp(
+            42px,
+            7vw,
+            75px
+        );
 
     color:#f1dfb4;
 
@@ -1352,7 +1742,9 @@ section{
 }
 
 .story-script{
-    font-family:"Great Vibes";
+
+    font-family:
+        "Great Vibes";
 
     font-size:60px;
 
@@ -1360,6 +1752,7 @@ section{
 }
 
 .story-text{
+
     max-width:680px;
 
     margin:25px auto;
@@ -1376,20 +1769,27 @@ section{
 }
 
 .story-heart{
+
     font-size:65px;
+
     margin:25px 0;
 }
 
 .story-btn{
+
     margin-top:15px;
 
-    padding:13px 25px;
+    padding:
+        13px 25px;
 
     border-radius:50px;
 
-    border:1px solid rgba(239,214,156,.5);
+    border:
+        1px solid
+        rgba(239,214,156,.5);
 
-    background:rgba(255,255,255,.04);
+    background:
+        rgba(255,255,255,.04);
 
     color:#efd69c;
 
@@ -1402,6 +1802,7 @@ section{
 ===================================================== */
 
 .proposal{
+
     min-height:90svh;
 
     display:flex;
@@ -1425,6 +1826,7 @@ section{
 }
 
 .proposal::before{
+
     content:"";
 
     position:absolute;
@@ -1434,10 +1836,13 @@ section{
 
     border-radius:50%;
 
-    border:1px solid rgba(239,214,156,.12);
+    border:
+        1px solid
+        rgba(239,214,156,.12);
 }
 
 .proposal-content{
+
     position:relative;
 
     z-index:2;
@@ -1446,6 +1851,7 @@ section{
 }
 
 .ring{
+
     font-size:70px;
 
     margin:30px 0;
@@ -1456,6 +1862,7 @@ section{
 }
 
 @keyframes ring{
+
     50%{
         transform:
             translateY(-10px)
@@ -1464,9 +1871,16 @@ section{
 }
 
 .proposal h2{
-    font-family:"Cormorant Garamond";
 
-    font-size:clamp(65px,10vw,120px);
+    font-family:
+        "Cormorant Garamond";
+
+    font-size:
+        clamp(
+            65px,
+            10vw,
+            120px
+        );
 
     font-weight:400;
 
@@ -1476,9 +1890,11 @@ section{
 }
 
 .proposal h2 span{
+
     display:block;
 
-    font-family:"Great Vibes";
+    font-family:
+        "Great Vibes";
 
     color:#e9c98b;
 
@@ -1488,6 +1904,7 @@ section{
 }
 
 .proposal p{
+
     max-width:680px;
 
     margin:30px auto;
@@ -1498,11 +1915,13 @@ section{
 }
 
 .secret{
+
     display:none;
 
     margin-top:35px;
 
-    font-family:"Cormorant Garamond";
+    font-family:
+        "Cormorant Garamond";
 
     font-size:30px;
 
@@ -1510,6 +1929,7 @@ section{
 }
 
 .secret.show{
+
     display:block;
 
     animation:
@@ -1517,13 +1937,17 @@ section{
 }
 
 @keyframes appear{
+
     from{
         opacity:0;
-        transform:translateY(20px);
+
+        transform:
+            translateY(20px);
     }
 
     to{
         opacity:1;
+
         transform:none;
     }
 }
@@ -1534,6 +1958,7 @@ section{
 ===================================================== */
 
 .final{
+
     min-height:90svh;
 
     display:flex;
@@ -1545,20 +1970,29 @@ section{
     text-align:center;
 
     background:
+
         radial-gradient(
             circle at center,
             rgba(112,25,42,.22),
             transparent 35%
         ),
+
         #f7ecdf;
 
     color:#4d1820;
 }
 
 .final h2{
-    font-family:"Cormorant Garamond";
 
-    font-size:clamp(70px,12vw,150px);
+    font-family:
+        "Cormorant Garamond";
+
+    font-size:
+        clamp(
+            70px,
+            12vw,
+            150px
+        );
 
     font-weight:400;
 
@@ -1566,9 +2000,11 @@ section{
 }
 
 .final h2 span{
+
     display:block;
 
-    font-family:"Great Vibes";
+    font-family:
+        "Great Vibes";
 
     color:#721d2c;
 
@@ -1578,6 +2014,7 @@ section{
 }
 
 .final p{
+
     max-width:700px;
 
     margin:35px auto;
@@ -1595,7 +2032,9 @@ section{
 ===================================================== */
 
 footer{
-    padding:35px 20px 60px;
+
+    padding:
+        35px 20px 60px;
 
     text-align:center;
 
@@ -1616,9 +2055,11 @@ footer{
 ===================================================== */
 
 .reveal{
+
     opacity:0;
 
-    transform:translateY(35px);
+    transform:
+        translateY(35px);
 
     transition:
         opacity 1s ease,
@@ -1626,6 +2067,7 @@ footer{
 }
 
 .reveal.show{
+
     opacity:1;
 
     transform:none;
@@ -1637,6 +2079,7 @@ footer{
 ===================================================== */
 
 .candle{
+
     position:fixed;
 
     left:20px;
@@ -1666,6 +2109,7 @@ footer{
 }
 
 .candle::before{
+
     content:"";
 
     position:absolute;
@@ -1700,6 +2144,7 @@ footer{
 }
 
 @keyframes flame{
+
     from{
         transform:
             translateX(-50%)
@@ -1719,6 +2164,7 @@ footer{
 ===================================================== */
 
 .rose{
+
     position:fixed;
 
     font-size:70px;
@@ -1731,15 +2177,20 @@ footer{
 }
 
 .rose-left{
+
     left:-20px;
+
     bottom:0;
 }
 
 .rose-right{
+
     right:-20px;
+
     top:20%;
 
-    transform:rotate(20deg);
+    transform:
+        rotate(20deg);
 }
 
 
@@ -1754,12 +2205,16 @@ footer{
     }
 
     #musicBtn{
+
         top:15px;
+
         right:15px;
+
         font-size:11px;
     }
 
     .hero h1{
+
         font-size:
             clamp(
                 70px,
@@ -1777,7 +2232,9 @@ footer{
     }
 
     .gallery-grid{
+
         grid-template-columns:1fr;
+
         grid-template-rows:
             repeat(3,400px);
     }
@@ -1803,13 +2260,17 @@ footer{
     }
 
     .heart-game-area{
+
         height:400px;
+
         border-radius:22px;
     }
 
     .target-heart{
+
         width:65px;
         height:65px;
+
         font-size:48px;
     }
 
@@ -1851,6 +2312,92 @@ footer{
         font-size:15px;
     }
 
+}
+
+.photo-card video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:1.2s ease;
+}
+
+.photo-card:hover video{
+    transform:scale(1.08);
+}
+
+/* ================================
+   AUTO SCROLL
+================================ */
+
+html.auto-scrolling {
+    scroll-behavior: auto !important;
+}
+
+#autoScrollBtn {
+    position: fixed;
+    right: 20px;
+    bottom: 22px;
+    z-index: 300;
+    
+    padding: 11px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(201,164,91,.7);
+    
+    background: rgba(15,4,7,.88);
+    color: var(--gold-light);
+    
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    
+    cursor: pointer;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    
+    transition:
+        opacity .35s ease,
+        transform .35s ease,
+        background .3s ease;
+}
+
+#autoScrollBtn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#autoScrollBtn:hover {
+    background: rgba(75,16,27,.95);
+}
+
+#autoScrollBtn:active {
+    transform: scale(.96);
+}
+
+/* HP */
+@media (max-width: 600px) {
+    #autoScrollBtn {
+        right: 15px;
+        bottom: 15px;
+        padding: 10px 15px;
+        font-size: 11px;
+    }
+}
+
+/* Kalau user memilih reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
 }
 
 </style>
@@ -1975,6 +2522,8 @@ footer{
         </h1>
 
 
+        <!-- FOTO SUSI -->
+
         <div class="hero-photo">
 
             <img
@@ -2032,7 +2581,9 @@ footer{
     <div class="section-head">
 
         <div class="eyebrow">
+
             YOUR SPECIAL DAY
+
         </div>
 
         <h2>
@@ -2105,7 +2656,9 @@ footer{
     <div class="section-head">
 
         <div class="eyebrow">
+
             A LETTER FROM ALDI
+
         </div>
 
         <h2>
@@ -2135,39 +2688,44 @@ footer{
 
 
             <p>
-                Selamat ulang tahun, sayang.
-                Aku mungkin dede selalu pandai menyampaikan ape yang aku rasekan,
-                jadi kali ini aku ingin menuliskannya pelan-pelan.
+
+               Selamat ulang tahun, sayang. Aku mungkin dede selalu pandai menyampaikan ape yang aku rasekan, jadi kali ini aku ingin menuliskannya pelan-pelan.
             </p>
 
 
             <p>
-                Terima kasih sude hadir di hidup aku.
-                Terima kasih untuk setiap cerite, tawe, perhatian,
-                dan waktu yang sude ngan kasih.
-                Banyak dari semuenye mungkin terlihat sederhane,
-                tapi justru hal-hal kecil itu lah yang sering aku ingat.
+
+                Terima kasih sude hadir di hidup aku. Terima kasih untuk setiap cerite, tawe, perhatian, dan waktu yang sude ngan kasih. Banyak dari semuenye mungkin terlihat sederhane, tapi justru hal-hal kecil itu lah yang sering aku ingat.
             </p>
 
 
             <p>
-                Aku dede berharap hubungan kite selalu sempurne.
-                Pasti akan ade hari dimane ketike kite beda pendapat,
-                same-same capek, atau mungkin dede tahu harus bagaimane.
+
+                Aku dede berharap hubungan kite
+                selalu sempurne.
+
+                Pasti akan ade hari dimane ketike kite
+                beda pendapat, same-same capek,
+                atau mungkin dede tahu harus bagaimane.
+
                 Tapi aku ingin belajar untuk tetap ade,
                 bukan cuma ketike semuanye mudah.
+
             </p>
 
 
             <p>
+
                 Aku ingin terus mengenal ngan,
                 memahami ngan lebih baik,
                 dan menjadi seseorang
                 yang pacak ngan percaye.
+
             </p>
 
 
             <p>
+
                 Di ulang tahun ngan ini,
                 doa aku sederhane.
 
@@ -2175,44 +2733,54 @@ footer{
                 semoga langkah ngan dimudahkan,
                 semoga ape yang sedang ngan perjuangkan
                 menemukan hasil yang baik.
+
             </p>
 
 
             <p>
+
                 Dan kalau Tuhan mengizinkan,
                 kalau kite masih terus berjalan bersame,
                 dan kalau kele aku sude
                 benar-benar siap...
+
             </p>
 
 
             <p>
 
                 <strong>
+
                     Aku ingin suatu hari kele
                     pacak melamarmu, sayang.
+
                 </strong>
 
             </p>
 
 
             <p>
+
                 Bukan hanya karena aku ingin memiliki ngan,
                 tapi karene aku ingin datang
                 dengan kesiapan untuk menjage,
                 menghargai, dan membangun kehidupan
                 bersama ngan.
+
             </p>
 
 
             <p>
+
                 Kalau kele waktunya tibe,
                 semoga aku masih menjadi
                 orang yang ngan pilih.
+
             </p>
 
 
             <p>
+
                 Selamat ulang tahun, sayangku.
 
                 Terima kasih sude lahir.
@@ -2222,6 +2790,7 @@ footer{
                 Dan terima kasih karene sampai hari ini
                 ngan masih menjadi seseorang
                 yang begitu aku sayangi.
+
             </p>
 
 
@@ -2251,7 +2820,9 @@ footer{
     <div class="section-head">
 
         <div class="eyebrow">
+
             OUR LITTLE MEMORIES
+
         </div>
 
         <h2>
@@ -2274,36 +2845,36 @@ footer{
     <div class="gallery-grid">
 
 
-        <div class="photo-card reveal">
+<div class="photo-card reveal">
 
-            <video
-                src="video1.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                controls>
-            </video>
+    <video
+      src="video1.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        controls>
+    </video>
 
-            <div class="photo-info">
+    <div class="photo-info">
 
-                <small>
-                    01 · OUR BEGINNING
-                </small>
+        <small>
+            01 · OUR BEGINNING
+        </small>
 
-                <h3>
-                    The Beginning
-                </h3>
+        <h3>
+            The Beginning
+        </h3>
 
-            </div>
+    </div>
 
-        </div>
+</div>
 
 
         <div class="photo-card reveal">
 
             <img
-                src="foto2.jpeg"
+              src="foto2.jpeg"
                 alt="Kenangan Susi">
 
             <div class="photo-info">
@@ -2324,7 +2895,7 @@ footer{
         <div class="photo-card reveal">
 
             <img
-                src="foto3.jpeg"
+               src="foto3.jpeg"
                 alt="Susi Sayang">
 
             <div class="photo-info">
@@ -2392,9 +2963,11 @@ footer{
             </h3>
 
             <p>
+
                 Melihat ngan tersenyum
-                sering kali lah cukup
+                sering kali lah  cukup
                 membuat hari aku terasa lebih baik.
+
             </p>
 
         </div>
@@ -2411,9 +2984,11 @@ footer{
             </h3>
 
             <p>
+
                 Cara ngan peduli terhadap
                 hal-hal kecil adalah sesuatu
                 yang selalu aku hargei.
+
             </p>
 
         </div>
@@ -2430,11 +3005,13 @@ footer{
             </h3>
 
             <p>
+
                 Aku dede butuh ngan
                 menjadi sempurne.
 
                 Aku sayang ngan
                 karene ngan adalah kamu.
+
             </p>
 
         </div>
@@ -2451,9 +3028,11 @@ footer{
             </h3>
 
             <p>
+
                 Ade sesuatu dari tawe ngan
                 yang selalu membuat suasane
                 terasa lebih ringan.
+
             </p>
 
         </div>
@@ -2470,9 +3049,11 @@ footer{
             </h3>
 
             <p>
+
                 Aku bangge melihat ngan
                 terus melangkah meskipun
                 ada hari-hari yang dede mudah.
+
             </p>
 
         </div>
@@ -2489,11 +3070,13 @@ footer{
             </h3>
 
             <p>
+
                 ngan dede harus melakukan
                 sesuatu yang besar.
 
                 Tahu ngan ade kian
                 sude berarti.
+
             </p>
 
         </div>
@@ -2505,15 +3088,18 @@ footer{
 
 
 <!-- =====================================================
-     GAME
+     GAME BARU
 ===================================================== -->
 
 <section
     class="game-section"
     id="game">
 
+
     <div class="game-box">
 
+
+        <!-- INTRO GAME -->
 
         <div class="game-intro">
 
@@ -2574,6 +3160,10 @@ footer{
         </div>
 
 
+        <!-- =================================================
+             GAME SCREEN
+        ================================================= -->
+
         <div
             class="game-screen"
             id="gameScreen">
@@ -2582,16 +3172,23 @@ footer{
             <div class="game-message">
 
                 <h3 id="gameTitle">
+
                     Tangkap 10 Hatiku ❤️
+
                 </h3>
 
+
                 <p id="gameDescription">
+
                     Klik hati yang muncul
                     sebelum waktunye habis.
+
                 </p>
 
             </div>
 
+
+            <!-- STATS -->
 
             <div class="game-stats">
 
@@ -2651,9 +3248,14 @@ footer{
             </div>
 
 
+            <!-- GAME AREA -->
+
             <div
                 class="heart-game-area"
                 id="heartGameArea">
+
+                <!-- HATI AKAN MUNCUL DI SINI -->
+
             </div>
 
 
@@ -2673,6 +3275,10 @@ footer{
 
         </div>
 
+
+        <!-- =================================================
+             RESULT
+        ================================================= -->
 
         <div
             class="game-result"
@@ -2722,13 +3328,17 @@ footer{
     class="story"
     id="story">
 
+
     <div class="story-box">
+
 
         <div class="story-content">
 
 
             <div class="story-small">
+
                 A LITTLE TRUTH FROM ALDI
+
             </div>
 
 
@@ -2738,7 +3348,9 @@ footer{
 
 
             <div class="story-title">
+
                 Hal terakhir...
+
             </div>
 
 
@@ -2746,8 +3358,10 @@ footer{
 
 
                 <p>
+
                     Ini bukan sesuatu yang pacak
                     ngan buka dengan klik.
+
                 </p>
 
 
@@ -2771,9 +3385,11 @@ footer{
 
 
                 <p>
+
                     Dari semue hal yang pacak aku ceritekan,
                     ternyate bagian paling penting
                     dari cerita ini adalah ngan.
+
                 </p>
 
 
@@ -2789,14 +3405,17 @@ footer{
 
 
                 <p>
-                    Aku dede tahu apekah aku orang
-                    yang terbaik yang pernah ngan temui.
+
+                    Aku dede tahu apekah aku orang  yang terbaik
+                    yang pernah ngan temui.
 
                     Aku juge tahu aku masih banyak kurangnye.
+
                 </p>
 
 
                 <p>
+
                     Kadang mungkin aku buat ngan kesel.
 
                     Kadang aku dede peka.
@@ -2804,6 +3423,7 @@ footer{
                     Kadang aku juga dede tahu
                     bagaimane care menjelaskan ape
                     yang ada di kepalaku.
+
                 </p>
 
 
@@ -2819,11 +3439,15 @@ footer{
 
 
                 <p>
+
                     <strong>
+
                         aku dede pernah menganggap
                         kehadiran ngan sebagai sesuatu
                         yang biase.
+
                     </strong>
+
                 </p>
 
 
@@ -2831,19 +3455,25 @@ footer{
 
 
                 <p>
+
                     Kalau suatu hari nanti kite sedang
                     same-same sibuk...
+
                 </p>
 
 
                 <p>
+
                     kalau nanti kite punye masalah...
+
                 </p>
 
 
                 <p>
+
                     kalu kele ade hari ketike kita
                     same-same capek...
+
                 </p>
 
 
@@ -2851,8 +3481,10 @@ footer{
 
 
                 <p>
+
                     aku harap kite dede langsung
                     memilih untuk menyerah.
+
                 </p>
 
 
@@ -2860,9 +3492,11 @@ footer{
 
 
                 <p>
+
                     Karene aku dede ingin hubungan ini
                     cuma menjadi cerite indah
                     yang pernah kita punye.
+
                 </p>
 
 
@@ -2870,10 +3504,14 @@ footer{
 
 
                 <p>
+
                     <strong>
+
                         Aku ingin kite menjadi cerite
                         yang terus kita tulis bersame.
+
                     </strong>
+
                 </p>
 
 
@@ -2881,12 +3519,14 @@ footer{
 
 
                 <p>
+
                     Pelan-pelan.
 
                     <br>
 
                     Sampai kite benar-benar tahu
                     sejauh ape kita pacak pergi.
+
                 </p>
 
 
@@ -2894,14 +3534,18 @@ footer{
 
 
                 <p>
+
                     Aku dede pacak menjanjikan
                     hidup kite kele akan selalu mudah.
+
                 </p>
 
 
                 <p>
+
                     Tapi kalau ngan masih galak
                     berjalan bersameku...
+
                 </p>
 
 
@@ -2909,10 +3553,14 @@ footer{
 
 
                 <p>
+
                     <strong>
-                        aku ingin belajah menghadapi
+
+                        aku ingin belajah  menghadapi
                         susah dan senangnye same-same.
+
                     </strong>
+
                 </p>
 
 
@@ -2943,13 +3591,17 @@ footer{
     class="story"
     id="finalStory">
 
+
     <div class="story-box">
+
 
         <div class="story-content">
 
 
             <div class="story-small">
+
                 FROM ALDI · ONLY FOR YOU
+
             </div>
 
 
@@ -2959,7 +3611,9 @@ footer{
 
 
             <div class="story-script">
+
                 Sayang...
+
             </div>
 
 
@@ -2967,7 +3621,9 @@ footer{
 
 
                 <p>
+
                     Aku pernah membayangkan satu hari.
+
                 </p>
 
 
@@ -2975,11 +3631,13 @@ footer{
 
 
                 <p>
+
                     Hari ketike aku dede lagi cuma bilang
 
                     <strong>
                         “Selamat ulang tahun.”
                     </strong>
+
                 </p>
 
 
@@ -2987,10 +3645,12 @@ footer{
 
 
                 <p>
+
                     Tapi aku pacak berdiri di depan ngan,
                     melihat ngan,
                     lalu mengatakan sesuatu
                     yang jauh lebih serius.
+
                 </p>
 
 
@@ -2998,8 +3658,10 @@ footer{
 
 
                 <p>
+
                     Sesuatu yang dede pacak lagi
                     cuma ditulis di website seperti ini.
+
                 </p>
 
 
@@ -3009,10 +3671,12 @@ footer{
                 <p>
 
                     <strong>
+
                         “Susi, maukah ngan menjadi orang
                         yang aku temui setiap pagi,
                         orang yang aku cari ketike hari sedang berat,
                         dan orang yang ingin aku pulangi?”
+
                     </strong>
 
                 </p>
@@ -3048,9 +3712,11 @@ footer{
                 <p>
 
                     <strong>
+
                         aku berharap suatu hari kele,
                         orang yang berdiri di hadapanku
                         masih ngan.
+
                     </strong>
 
                 </p>
@@ -3060,14 +3726,18 @@ footer{
 
 
                 <p>
+
                     Kalau suatu hari kele ngan membuka
                     halaman ini lagi,
                     mungkin kite sudah jauh lebih dewasa.
+
                 </p>
 
 
                 <p>
+
                     Mungkin banyak hal sude berubah.
+
                 </p>
 
 
@@ -3075,8 +3745,10 @@ footer{
 
 
                 <p>
+
                     Tapi aku berharap satu hal
                     tidak berubah...
+
                 </p>
 
 
@@ -3086,9 +3758,11 @@ footer{
                 <p>
 
                     <strong>
+
                         semoge orang yang membace pesan ini
                         masih menjadi orang yang same
                         yang sekarang sedang aku sayangi.
+
                     </strong>
 
                 </p>
@@ -3098,8 +3772,10 @@ footer{
 
 
                 <p>
+
                     Aku dede tahu masa depan akan
                     membawa kite ke mane.
+
                 </p>
 
 
@@ -3107,18 +3783,23 @@ footer{
 
 
                 <p>
+
                     Tapi kalau kele aku diberi
                     kesempatan untuk memilih lagi...
+
                 </p>
 
 
                 <br>
 
 
-                <p style="font-size:22px;">
+                <p
+                    style="font-size:22px;">
 
                     <strong>
+
                         aku tetap ingin memilih ngan.
+
                     </strong>
 
                 </p>
@@ -3138,8 +3819,10 @@ footer{
                 <p>
 
                     <strong>
+
                         Happy Birthday,
                         Susi Sayang.
+
                     </strong>
 
                 </p>
@@ -3149,6 +3832,7 @@ footer{
 
 
                 <p>
+
                     Terima kasih sude lahir.
 
                     <br>
@@ -3163,6 +3847,7 @@ footer{
 
                     karena pernah menjadi bagian
                     dari cerita hidupku.
+
                 </p>
 
 
@@ -3177,6 +3862,20 @@ footer{
                     ">
 
                     — Aldi
+
+                </p>
+
+
+                <br>
+
+
+                <p
+                    style="
+                    font-size:13px;
+                    color:#927e7f;
+                    ">
+
+               
 
                 </p>
 
@@ -3206,11 +3905,14 @@ footer{
 
 <section class="proposal">
 
+
     <div class="proposal-content">
 
 
         <div class="eyebrow">
+
             A HOPE FOR SOMEDAY
+
         </div>
 
 
@@ -3231,6 +3933,7 @@ footer{
 
 
         <p>
+
             Aku dede tahu kapan waktunye akan datang.
 
             Tapi kalau suatu hari nanti aku sudae siap
@@ -3238,18 +3941,21 @@ footer{
             yang lebih serius,
             aku ingin orang yang ada di hadapanku
             tetap ngan.
+
         </p>
 
 
         <p>
 
             <strong>
+
                 Semoga suatu hari nanti
                 aku pacak datang ke ngan
                 bukan hanya dengan ucapan ulang tahun,
                 tetapi dengan sebuah cincin
                 dan satu pertanyaan
                 yang sude lame kusimpan.
+
             </strong>
 
         </p>
@@ -3287,11 +3993,14 @@ footer{
 
 <section class="final">
 
+
     <div>
 
 
         <div class="eyebrow">
+
             FROM ALDI, WITH LOVE
+
         </div>
 
 
@@ -3315,8 +4024,10 @@ footer{
             <br><br>
 
             <em>
+
                 “Ternyate kite benar-benar
                 sampai sejauh ini.”
+
             </em>
 
         </p>
@@ -3351,6 +4062,7 @@ footer{
 
 <script>
 
+
 /* =====================================================
    INTRO
 ===================================================== */
@@ -3367,7 +4079,7 @@ const music =
 const musicBtn =
     document.getElementById("musicBtn");
 
-let musicPlaying = false;
+let musicPlaying=false;
 
 
 openBtn.addEventListener(
@@ -3379,15 +4091,15 @@ openBtn.addEventListener(
         createPetals(45);
 
         music.play()
-        .then(function(){
+        .then(()=>{
 
-            musicPlaying = true;
+            musicPlaying=true;
 
-            musicBtn.innerHTML =
+            musicBtn.innerHTML=
                 "Ⅱ &nbsp; Our Song Playing";
 
         })
-        .catch(function(){});
+        .catch(()=>{});
 
     }
 );
@@ -3407,18 +4119,18 @@ musicBtn.addEventListener(
 
                 music.pause();
 
-                musicPlaying = false;
+                musicPlaying=false;
 
-                musicBtn.innerHTML =
+                musicBtn.innerHTML=
                     "♫ &nbsp; Play Our Song";
 
             }else{
 
                 await music.play();
 
-                musicPlaying = true;
+                musicPlaying=true;
 
-                musicBtn.innerHTML =
+                musicBtn.innerHTML=
                     "Ⅱ &nbsp; Our Song Playing";
 
             }
@@ -3454,8 +4166,7 @@ function createPetals(number){
         const petal =
             document.createElement("div");
 
-        petal.className =
-            "petal";
+        petal.className="petal";
 
         petal.textContent =
             Math.random()>.25
@@ -3483,10 +4194,8 @@ function createPetals(number){
 
 
         setTimeout(
-            function(){
-
+            ()=>{
                 petal.remove();
-
             },
             17000
         );
@@ -3497,10 +4206,8 @@ function createPetals(number){
 
 
 setInterval(
-    function(){
-
+    ()=>{
         createPetals(2);
-
     },
     3500
 );
@@ -3511,6 +4218,7 @@ createPetals(20);
 
 /* =====================================================
    GAME
+   CATCH MY HEART
 ===================================================== */
 
 const startGame =
@@ -3550,18 +4258,28 @@ const nextStory =
     document.getElementById("nextStory");
 
 
-let heartsCaught = 0;
-let gameScore = 0;
-let combo = 0;
-let timeLeft = 30;
+/* GAME VARIABLES */
 
-let gameTimer = null;
-let heartTimer = null;
+let heartsCaught=0;
 
-let gameRunning = false;
+let gameScore=0;
 
-const targetTotal = 10;
+let combo=0;
 
+let timeLeft=30;
+
+let gameTimer=null;
+
+let heartTimer=null;
+
+let gameRunning=false;
+
+const targetTotal=10;
+
+
+/* =====================================================
+   START GAME
+===================================================== */
 
 startGame.addEventListener(
     "click",
@@ -3569,95 +4287,66 @@ startGame.addEventListener(
 );
 
 
-/* =====================================================
-   START GAME
-===================================================== */
-
 function startHeartGame(){
-
-    stopAutoScroll();
 
     gameScreen.classList.add("active");
 
     gameResult.classList.remove("show");
 
+    heartsCaught=0;
 
-    setTimeout(function(){
+    gameScore=0;
 
-        gameScreen.scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
+    combo=0;
 
-    }, 50);
+    timeLeft=30;
 
-
-    heartsCaught = 0;
-    gameScore = 0;
-    combo = 0;
-    timeLeft = 30;
-
-    gameRunning = true;
-
-    // lanjutkan kode game kamu...
-}
-
-    heartsCaught = 0;
-    gameScore = 0;
-    combo = 0;
-    timeLeft = 30;
-
-    gameRunning = true;
+    gameRunning=true;
 
 
-    timerElement.textContent =
+    timerElement.textContent=
         timeLeft;
 
-    timerElement.style.color =
-        "#efd69c";
-
-
-    foundElement.textContent =
+    foundElement.textContent=
         "0 / 10";
 
-    comboElement.textContent =
+    comboElement.textContent=
         "x0";
 
-    scoreElement.textContent =
+    scoreElement.textContent=
         "0";
 
 
-    gameTitle.textContent =
+    gameTitle.textContent=
         "Tangkap 10 Hatiku ❤️";
 
-    gameDescription.textContent =
+    gameDescription.textContent=
         "Klik hati yang muncul sebelum waktunya habis.";
 
 
-    gameArea.innerHTML = "";
+    gameArea.innerHTML="";
 
 
     clearInterval(gameTimer);
+
     clearInterval(heartTimer);
 
+
+    /* TIMER */
 
     gameTimer =
         setInterval(
             function(){
 
-                if(!gameRunning){
-                    return;
-                }
-
                 timeLeft--;
 
-                timerElement.textContent =
+                timerElement.textContent=
                     timeLeft;
 
 
                 if(timeLeft<=10){
 
-                    timerElement.style.color =
+                    timerElement.style.color=
                         "#ff758d";
 
                 }
@@ -3674,12 +4363,14 @@ function startHeartGame(){
         );
 
 
+    /* FIRST HEART */
+
     spawnHeart();
 
 
     /*
-       Heart muncul lebih cepat
-       supaya game terasa responsif.
+       Hati baru muncul setiap
+       sekitar 1.1 detik.
     */
 
     heartTimer =
@@ -3693,17 +4384,18 @@ function startHeartGame(){
                 }
 
             },
-            950
+            1100
         );
 
 
-    /*
-       Scroll menuju game.
-       Smooth tetapi tidak terlalu lama.
-    */
+ stopAutoScroll();
 
-  
-
+setTimeout(() => {
+    gameScreen.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}, 100);
 }
 
 
@@ -3718,30 +4410,36 @@ function spawnHeart(){
     }
 
 
+    /* Jangan terlalu banyak */
+
     const oldHeart =
         document.querySelector(
             ".target-heart"
         );
 
-
     if(oldHeart){
+
         oldHeart.remove();
+
     }
 
 
     const heart =
         document.createElement("div");
 
-
-    heart.className =
+    heart.className=
         "target-heart";
 
-
-    heart.textContent =
+    heart.textContent=
         Math.random()>.15
         ? "❤️"
         : "💖";
 
+
+    /*
+       Posisi acak tetapi tetap
+       aman dari tepi.
+    */
 
     const areaWidth =
         gameArea.clientWidth;
@@ -3750,31 +4448,25 @@ function spawnHeart(){
         gameArea.clientHeight;
 
 
-    const heartSize = 75;
+    const heartSize=75;
 
 
     const x =
         Math.random() *
-        Math.max(
-            1,
-            areaWidth-heartSize-30
-        )
+        (areaWidth-heartSize-30)
         +15;
 
 
     const y =
         Math.random() *
-        Math.max(
-            1,
-            areaHeight-heartSize-70
-        )
+        (areaHeight-heartSize-70)
         +15;
 
 
-    heart.style.left =
+    heart.style.left=
         x+"px";
 
-    heart.style.top =
+    heart.style.top=
         y+"px";
 
 
@@ -3794,9 +4486,7 @@ function spawnHeart(){
     );
 
 
-    gameArea.appendChild(
-        heart
-    );
+    gameArea.appendChild(heart);
 
 }
 
@@ -3824,13 +4514,17 @@ function catchHeart(
     combo++;
 
 
+    /*
+       Semakin tinggi combo,
+       semakin banyak poin.
+    */
+
     const points =
         100 +
         (combo-1)*25;
 
 
-    gameScore +=
-        points;
+    gameScore += points;
 
 
     foundElement.textContent =
@@ -3855,7 +4549,9 @@ function catchHeart(
     createPetals(3);
 
 
-    const messages = [
+    /* MESSAGE */
+
+    const messages=[
 
         "Nah! Ketemu satu ❤️",
 
@@ -3880,6 +4576,8 @@ function catchHeart(
         ];
 
 
+    /* WIN */
+
     if(heartsCaught>=targetTotal){
 
         endHeartGame(true);
@@ -3902,29 +4600,25 @@ function createClickEffect(
     const effect =
         document.createElement("div");
 
-    effect.className =
+    effect.className=
         "click-effect";
 
-    effect.textContent =
+    effect.textContent=
         text;
 
-    effect.style.left =
+    effect.style.left=
         x+"px";
 
-    effect.style.top =
+    effect.style.top=
         y+"px";
 
 
-    gameArea.appendChild(
-        effect
-    );
+    gameArea.appendChild(effect);
 
 
     setTimeout(
-        function(){
-
+        ()=>{
             effect.remove();
-
         },
         800
     );
@@ -3943,10 +4637,11 @@ function endHeartGame(won){
     }
 
 
-    gameRunning = false;
+    gameRunning=false;
 
 
     clearInterval(gameTimer);
+
     clearInterval(heartTimer);
 
 
@@ -3954,7 +4649,6 @@ function endHeartGame(won){
         document.querySelector(
             ".target-heart"
         );
-
 
     if(heart){
         heart.remove();
@@ -3980,6 +4674,10 @@ function endHeartGame(won){
 
 function winHeartGame(){
 
+    /*
+       Bonus jika masih ada waktu.
+    */
+
     const timeBonus =
         timeLeft*20;
 
@@ -3988,19 +4686,19 @@ function winHeartGame(){
         timeBonus;
 
 
-    scoreElement.textContent =
+    scoreElement.textContent=
         gameScore;
 
 
-    gameTitle.textContent =
+    gameTitle.textContent=
         "Kamu berhasil menangkap hatiku ❤️";
 
 
-    gameDescription.textContent =
+    gameDescription.textContent=
         "Aku kira kamu nggak akan berhasil... ternyata kamu memang jago.";
 
-
-    resultText.innerHTML = `
+    
+    resultText.innerHTML=`
 
         Kamu berhasil menangkap
         <strong>10 hati</strong>
@@ -4009,7 +4707,10 @@ function winHeartGame(){
         <br><br>
 
         Skor kamu:
-        <strong>${gameScore}</strong>
+
+        <strong>
+            ${gameScore}
+        </strong>
 
         <br><br>
 
@@ -4050,15 +4751,14 @@ function winHeartGame(){
 
 function loseHeartGame(){
 
-    gameTitle.textContent =
+    gameTitle.textContent=
         "Waktunye habis... ❤️";
 
-
-    gameDescription.textContent =
+    gameDescription.textContent=
         "Belum semue hatiku berhasil ngan tangkap.";
 
 
-    resultText.innerHTML = `
+    resultText.innerHTML=`
 
         Waktu ngan lah habis.
 
@@ -4103,19 +4803,16 @@ function loseHeartGame(){
 
 
 /* =====================================================
-   RESTART GAME
+   RESTART
 ===================================================== */
 
 function restartHeartGame(){
 
     gameResult.classList.remove("show");
 
-
     setTimeout(
-        function(){
-
+        ()=>{
             startHeartGame();
-
         },
         300
     );
@@ -4154,8 +4851,7 @@ document
 
             document
                 .getElementById("story")
-                .classList
-                .remove("show");
+                .classList.remove("show");
 
 
             setTimeout(
@@ -4163,8 +4859,7 @@ document
 
                     document
                         .getElementById("finalStory")
-                        .classList
-                        .add("show");
+                        .classList.add("show");
 
 
                     createPetals(60);
@@ -4185,14 +4880,13 @@ function closeFinal(){
 
     document
         .getElementById("finalStory")
-        .classList
-        .remove("show");
+        .classList.remove("show");
 
 }
 
 
 /* =====================================================
-   CLOSE STORY
+   CLOSE MODAL
 ===================================================== */
 
 document
@@ -4203,9 +4897,7 @@ document
 
             if(e.target===this){
 
-                this.classList.remove(
-                    "show"
-                );
+                this.classList.remove("show");
 
             }
 
@@ -4221,9 +4913,7 @@ document
 
             if(e.target===this){
 
-                this.classList.remove(
-                    "show"
-                );
+                this.classList.remove("show");
 
             }
 
@@ -4264,12 +4954,12 @@ proposalBtn.addEventListener(
             )
         ){
 
-            proposalBtn.textContent =
+            proposalBtn.textContent=
                 "♡ Untuk Susi Sayang";
 
         }else{
 
-            proposalBtn.textContent =
+            proposalBtn.textContent=
                 "Buka Pesan Terakhir";
 
         }
@@ -4360,325 +5050,239 @@ document.addEventListener(
     }
 );
 
+/* =========================================
+   AUTO SCROLL OTOMATIS
+   Open → tunggu 1.8 detik → scroll pelan
+   Sentuh/geser layar → berhenti
+========================================= */
 
-/* =====================================================
-   AUTO SCROLL PREMIUM
-   HALUS + LEBIH CEPAT + RESPONSIF HP/LAPTOP
-===================================================== */
+const autoScrollBtn = document.getElementById("autoScrollBtn");
 
-let autoScrollRunning = false;
-let autoScrollRAF = null;
-let resumeTimer = null;
+let autoScrolling = false;
+let autoScrollFrame = null;
+let autoScrollLastTime = 0;
+let autoScrollStartTimer = null;
 
-let autoScrollSpeed = window.innerWidth <= 750
-    ? 1.15
-    : 1.35;
+/*
+   Kecepatan scroll.
+   Semakin kecil = semakin pelan.
 
-
-/* =====================================================
-   CEK WEBSITE SUDAH DIBUKA
-===================================================== */
-
-function isWebsiteOpened(){
-
-    const introElement =
-        document.getElementById("intro");
-
-    return (
-        introElement &&
-        introElement.classList.contains("hide")
-    );
-
-}
+   0.25 ≈ sangat pelan
+   0.35 ≈ pelan
+   0.45 ≈ sedang
+*/
+const AUTO_SCROLL_SPEED = 0.25;
 
 
-/* =====================================================
-   START AUTO SCROLL
-===================================================== */
+/* ================================
+   MULAI AUTO SCROLL
+================================ */
 
-function startAutoScroll(){
+function startAutoScroll() {
 
-    if(!isWebsiteOpened()) return;
+    if (autoScrolling) return;
 
-    if(
-        typeof gameRunning !== "undefined" &&
-        gameRunning
-    ){
-        return;
-    }
-
-    if(autoScrollRunning) return;
-
-    autoScrollRunning = true;
-
-    autoScrollRAF =
-        requestAnimationFrame(autoScrollLoop);
-
-}
-
-
-/* =====================================================
-   AUTO SCROLL LOOP
-===================================================== */
-
-function autoScrollLoop(){
-
-    if(!autoScrollRunning){
-
-        autoScrollRAF = null;
-        return;
-
-    }
-
-
-    /* Jangan scroll saat game dimainkan */
-
-    if(
-        typeof gameRunning !== "undefined" &&
-        gameRunning
-    ){
-
-        stopAutoScroll();
-        return;
-
-    }
-
-
+    // Jangan jalan kalau sudah sampai bawah
     const maxScroll =
         document.documentElement.scrollHeight -
         window.innerHeight;
 
-
-    /* Sampai paling bawah */
-
-    if(
-        maxScroll <= 0 ||
-        window.scrollY >= maxScroll - 2
-    ){
-
-        stopAutoScroll();
+    if (window.scrollY >= maxScroll - 5) {
         return;
-
     }
 
+    autoScrolling = true;
+
+    document.documentElement.classList.add("auto-scrolling");
+
+    autoScrollBtn.classList.add("show");
+    autoScrollBtn.innerHTML = "Ⅱ &nbsp; Pause Scroll";
+
+    autoScrollLastTime = performance.now();
+
+    autoScrollFrame =
+        requestAnimationFrame(autoScrollStep);
+}
+
+
+/* ================================
+   LANGKAH AUTO SCROLL
+================================ */
+
+function autoScrollStep(timestamp) {
+
+    if (!autoScrolling) return;
+
+    const delta =
+        timestamp - autoScrollLastTime;
+
+    autoScrollLastTime = timestamp;
 
     /*
-       Scroll lebih halus menggunakan
-       requestAnimationFrame.
+       Membuat kecepatan tetap stabil
+       walaupun FPS HP berubah.
     */
+    const movement =
+        AUTO_SCROLL_SPEED * (delta / 16.67);
 
-    window.scrollTo({
-        top: Math.min(
-            window.scrollY + autoScrollSpeed,
-            maxScroll
-        ),
-        behavior: "instant"
-    });
+    window.scrollBy(0, movement);
 
+    const bottomReached =
+        window.innerHeight +
+        window.scrollY >=
+        document.documentElement.scrollHeight - 5;
 
-    autoScrollRAF =
-        requestAnimationFrame(autoScrollLoop);
+    if (bottomReached) {
+        stopAutoScroll();
+        return;
+    }
 
+    autoScrollFrame =
+        requestAnimationFrame(autoScrollStep);
 }
 
 
-/* =====================================================
+/* ================================
    STOP AUTO SCROLL
-===================================================== */
+================================ */
 
-function stopAutoScroll(){
+function stopAutoScroll() {
 
-    autoScrollRunning = false;
+    autoScrolling = false;
 
-
-    if(autoScrollRAF !== null){
-
-        cancelAnimationFrame(
-            autoScrollRAF
-        );
-
-        autoScrollRAF = null;
-
+    if (autoScrollFrame !== null) {
+        cancelAnimationFrame(autoScrollFrame);
+        autoScrollFrame = null;
     }
 
+    document.documentElement.classList.remove(
+        "auto-scrolling"
+    );
+
+    autoScrollBtn.innerHTML =
+        "↓ &nbsp; Auto Scroll";
 }
 
 
-/* =====================================================
-   RESUME AUTO SCROLL
-===================================================== */
+/* ================================
+   TOMBOL AUTO SCROLL
+================================ */
 
-function resumeAutoScroll(delay = 400){
+autoScrollBtn.addEventListener("click", function(e) {
 
-    clearTimeout(resumeTimer);
+    e.stopPropagation();
 
-    resumeTimer =
-        setTimeout(function(){
-
-            startAutoScroll();
-
-        }, delay);
-
-}
-
-
-/* =====================================================
-   OPEN YOUR LETTER
-===================================================== */
-
-openBtn.addEventListener(
-    "click",
-    function(){
-
-        clearTimeout(resumeTimer);
-
-        /*
-           Tunggu animasi intro selesai,
-           kemudian langsung mulai scroll.
-        */
-
-        setTimeout(function(){
-
-            startAutoScroll();
-
-        }, 900);
-
-    }
-);
-
-
-/* =====================================================
-   KLIK DI HALAMAN
-===================================================== */
-
-document.addEventListener(
-    "click",
-    function(e){
-
-        if(!isWebsiteOpened()) return;
-
-
-        /*
-           Semua klik di dalam game
-           tidak mengganggu auto-scroll.
-        */
-
-        const game =
-            document.getElementById("game");
-
-        if(
-            game &&
-            game.contains(e.target)
-        ){
-
-            return;
-
-        }
-
-
+    if (autoScrolling) {
         stopAutoScroll();
+    } else {
+        startAutoScroll();
+    }
 
-        resumeAutoScroll(450);
-
-    },
-    true
-);
+});
 
 
-/* =====================================================
+/* ================================
+   MOUSE / TRACKPAD
+================================ */
+
+window.addEventListener("wheel", function() {
+
+    if (autoScrolling) {
+        stopAutoScroll();
+    }
+
+}, { passive: true });
+
+
+/* ================================
    TOUCH HP
-===================================================== */
+================================ */
 
-window.addEventListener(
-    "touchstart",
-    function(){
+let touchStartY = 0;
 
-        if(!isWebsiteOpened()) return;
+window.addEventListener("touchstart", function(e) {
 
+    if (!autoScrolling) return;
+
+    if (e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+    }
+
+}, { passive: true });
+
+
+window.addEventListener("touchmove", function(e) {
+
+    if (!autoScrolling) return;
+
+    if (e.touches.length === 0) return;
+
+    const currentY = e.touches[0].clientY;
+
+    /*
+       Hanya berhenti ketika benar-benar
+       menggeser layar.
+
+       Jadi kalau user hanya TAP tombol,
+       tombol tetap bisa diklik.
+    */
+    if (Math.abs(currentY - touchStartY) > 8) {
         stopAutoScroll();
-
-        clearTimeout(resumeTimer);
-
-    },
-    {
-        passive:true
     }
-);
+
+}, { passive: true });
 
 
-window.addEventListener(
-    "touchend",
-    function(){
+/* ================================
+   KEYBOARD
+================================ */
 
-        if(!isWebsiteOpened()) return;
+window.addEventListener("keydown", function(e) {
 
-        resumeAutoScroll(600);
+    if (!autoScrolling) return;
 
-    },
-    {
-        passive:true
-    }
-);
+    const keys = [
+        "ArrowDown",
+        "ArrowUp",
+        "PageDown",
+        "PageUp",
+        "Home",
+        "End",
+        " "
+    ];
 
-
-/* =====================================================
-   MOUSE WHEEL
-===================================================== */
-
-window.addEventListener(
-    "wheel",
-    function(){
-
-        if(!isWebsiteOpened()) return;
-
+    if (keys.includes(e.key)) {
         stopAutoScroll();
-
-        resumeAutoScroll(600);
-
-    },
-    {
-        passive:true
     }
-);
+
+});
 
 
-/* =====================================================
-   VISIBILITY
-===================================================== */
+/* ================================
+   OPEN
+   Tunggu 1.8 detik
+=============================== */
 
-document.addEventListener(
-    "visibilitychange",
-    function(){
+openBtn.addEventListener("click", function() {
 
-        if(
-            !document.hidden &&
-            isWebsiteOpened()
-        ){
+    clearTimeout(autoScrollStartTimer);
 
-            resumeAutoScroll(500);
+    /*
+       Intro selesai dulu.
+       Setelah 1.8 detik baru mulai scroll.
+    */
+    autoScrollStartTimer = setTimeout(function() {
 
-        }
+        startAutoScroll();
 
-    }
-);
+    }, 1800);
 
-
-/* =====================================================
-   RESPONSIVE SPEED
-===================================================== */
-
-window.addEventListener(
-    "resize",
-    function(){
-
-        autoScrollSpeed =
-            window.innerWidth <= 750
-                ? 1.15
-                : 1.35;
-
-    }
-);
+});
 </script>
+
+<button id="autoScrollBtn">
+    ↓ &nbsp; Auto Scroll
+</button>
 
 </body>
 </html>
