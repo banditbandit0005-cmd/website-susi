@@ -2495,10 +2495,6 @@ html.auto-scrolling {
     src="lagu-romantis.mp3">
 </audio>
 
-<button id="autoScrollBtn">
-    ↓ &nbsp; Auto Scroll
-</button>
-
 
 <!-- =====================================================
      HERO
@@ -4064,6 +4060,11 @@ html.auto-scrolling {
 </footer>
 
 
+<button id="autoScrollBtn">
+    ↓ &nbsp; Auto Scroll
+</button>
+
+
 <script>
 
 
@@ -4082,6 +4083,12 @@ const music =
 
 const musicBtn =
     document.getElementById("musicBtn");
+
+const autoScrollBtn = document.getElementById("autoScrollBtn");
+let autoScrolling = false;
+let autoScrollFrame = null;
+let autoScrollLastTime = 0;
+let autoScrollStartTimer = null;
 
 let musicPlaying=false;
 
@@ -4104,6 +4111,12 @@ openBtn.addEventListener(
 
         })
         .catch(()=>{});
+
+        // Mulai auto-scroll 1.8 detik setelah tombol Open ditekan.
+        clearTimeout(autoScrollStartTimer);
+        autoScrollStartTimer = setTimeout(function(){
+            startAutoScroll();
+        }, 1800);
 
     }
 );
@@ -5060,12 +5073,6 @@ document.addEventListener(
    Sentuh/geser layar → berhenti
 ========================================= */
 
-const autoScrollBtn = document.getElementById("autoScrollBtn");
-
-let autoScrolling = false;
-let autoScrollFrame = null;
-let autoScrollLastTime = 0;
-let autoScrollStartTimer = null;
 
 /*
    Kecepatan scroll.
@@ -5075,7 +5082,7 @@ let autoScrollStartTimer = null;
    0.35 ≈ pelan
    0.45 ≈ sedang
 */
-const AUTO_SCROLL_SPEED = 0.25;
+const AUTO_SCROLL_SPEED = 0.45;
 
 
 /* ================================
@@ -5129,7 +5136,11 @@ function autoScrollStep(timestamp) {
     const movement =
         AUTO_SCROLL_SPEED * (delta / 16.67);
 
-    window.scrollBy(0, movement);
+    window.scrollTo({
+        top: window.scrollY + movement,
+        left: 0,
+        behavior: "auto"
+    });
 
     const bottomReached =
         window.innerHeight +
@@ -5261,30 +5272,7 @@ window.addEventListener("keydown", function(e) {
 
 });
 
-
-/* ================================
-   OPEN
-   Tunggu 1.8 detik
-=============================== */
-
-openBtn.addEventListener("click", function() {
-
-    clearTimeout(autoScrollStartTimer);
-
-    /*
-       Intro selesai dulu.
-       Setelah 1.8 detik baru mulai scroll.
-    */
-    autoScrollStartTimer = setTimeout(function() {
-
-        startAutoScroll();
-
-    }, 1800);
-
-});
 </script>
-
-
 
 </body>
 </html>
