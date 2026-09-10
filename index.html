@@ -4084,12 +4084,6 @@ const music =
 const musicBtn =
     document.getElementById("musicBtn");
 
-const autoScrollBtn = document.getElementById("autoScrollBtn");
-let autoScrolling = false;
-let autoScrollFrame = null;
-let autoScrollLastTime = 0;
-let autoScrollStartTimer = null;
-
 let musicPlaying=false;
 
 
@@ -4111,12 +4105,6 @@ openBtn.addEventListener(
 
         })
         .catch(()=>{});
-
-        // Mulai auto-scroll 1.8 detik setelah tombol Open ditekan.
-        clearTimeout(autoScrollStartTimer);
-        autoScrollStartTimer = setTimeout(function(){
-            startAutoScroll();
-        }, 1800);
 
     }
 );
@@ -5068,208 +5056,198 @@ document.addEventListener(
 );
 
 /* =========================================
-   AUTO SCROLL OTOMATIS
-   Open → tunggu 1.8 detik → scroll pelan
-   Sentuh/geser layar → berhenti
+   AUTO SCROLL — AUTO RESUME
+   Open → 1.8 detik → jalan pelan
+   user geser/scroll → berhenti sementara
+   user berhenti menggeser → otomatis jalan lagi
 ========================================= */
 
+const autoScrollBtn = document.getElementById("autoScrollBtn");
 
-/*
-   Kecepatan scroll.
-   Semakin kecil = semakin pelan.
+let autoScrolling = false;
+let autoScrollFrame = null;
+let autoScrollStartTimer = null;
+let autoScrollResumeTimer = null;
+let autoScrollLastTime = 0;
+let autoScrollCarry = 0;
+let autoScrollUserPaused = false;
 
-   0.25 ≈ sangat pelan
-   0.35 ≈ pelan
-   0.45 ≈ sedang
-*/
-const AUTO_SCROLL_SPEED = 0.45;
+// Kecepatan sekitar 39 px/detik.
+const AUTO_SCROLL_SPEED = 0.65;
+// Berapa lama setelah user berhenti menggeser sebelum auto-scroll hidup lagi.
+const AUTO_RESUME_DELAY = 1600;
 
-
-/* ================================
-   MULAI AUTO SCROLL
-================================ */
-
-function startAutoScroll() {
-
-    if (autoScrolling) return;
-
-    // Jangan jalan kalau sudah sampai bawah
-    const maxScroll =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-
-    if (window.scrollY >= maxScroll - 5) {
-        return;
-    }
-
-    autoScrolling = true;
-
-    document.documentElement.classList.add("auto-scrolling");
-
-    autoScrollBtn.classList.add("show");
-    autoScrollBtn.innerHTML = "Ⅱ &nbsp; Pause Scroll";
-
-    autoScrollLastTime = performance.now();
-
-    autoScrollFrame =
-        requestAnimationFrame(autoScrollStep);
+function getScrollTop(){
+    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 }
 
-
-/* ================================
-   LANGKAH AUTO SCROLL
-================================ */
-
-function autoScrollStep(timestamp) {
-
-    if (!autoScrolling) return;
-
-    const delta =
-        timestamp - autoScrollLastTime;
-
-    autoScrollLastTime = timestamp;
-
-    /*
-       Membuat kecepatan tetap stabil
-       walaupun FPS HP berubah.
-    */
-    const movement =
-        AUTO_SCROLL_SPEED * (delta / 16.67);
-
-    window.scrollTo({
-        top: window.scrollY + movement,
-        left: 0,
-        behavior: "auto"
-    });
-
-    const bottomReached =
-        window.innerHeight +
-        window.scrollY >=
-        document.documentElement.scrollHeight - 5;
-
-    if (bottomReached) {
-        stopAutoScroll();
-        return;
-    }
-
-    autoScrollFrame =
-        requestAnimationFrame(autoScrollStep);
+function getMaxScroll(){
+    return Math.max(
+        0,
+        Math.max(
+            document.documentElement.scrollHeight,
+            document.body ? document.body.scrollHeight : 0
+        ) - window.innerHeight
+    );
 }
 
+function clearAutoResume(){
+    if(autoScrollResumeTimer !== null){
+        clearTimeout(autoScrollResumeTimer);
+        autoScrollResumeTimer = null;
+    }
+}
 
-/* ================================
-   STOP AUTO SCROLL
-================================ */
+function scheduleAutoResume(){
+    clearAutoResume();
 
-function stopAutoScroll() {
+    if(autoScrollUserPaused) return;
 
-    autoScrolling = false;
+    autoScrollResumeTimer = setTimeout(function(){
+        autoScrollResumeTimer = null;
 
-    if (autoScrollFrame !== null) {
+        // Hanya hidup lagi kalau user tidak sedang melakukan scroll manual.
+        if(!autoScrollUserPaused){
+            startAutoScroll();
+        }
+    }, AUTO_RESUME_DELAY);
+}
+
+function startAutoScroll(){
+    if(autoScrolling) return;
+
+    const maxScroll = getMaxScroll();
+    if(maxScroll <= 2 || getScrollTop() >= maxScroll - 2) return;
+
+    clearAutoResume();
+
+    if(autoScrollFrame !== null){
         cancelAnimationFrame(autoScrollFrame);
         autoScrollFrame = null;
     }
 
-    document.documentElement.classList.remove(
-        "auto-scrolling"
-    );
+    autoScrolling = true;
+    autoScrollCarry = 0;
+    autoScrollLastTime = performance.now();
 
-    autoScrollBtn.innerHTML =
-        "↓ &nbsp; Auto Scroll";
+    document.documentElement.classList.add("auto-scrolling");
+    autoScrollBtn.classList.add("show");
+    autoScrollBtn.innerHTML = "Ⅱ &nbsp; Pause Scroll";
+
+    autoScrollFrame = requestAnimationFrame(autoScrollStep);
 }
 
+function autoScrollStep(now){
+    if(!autoScrolling) return;
 
-/* ================================
-   TOMBOL AUTO SCROLL
-================================ */
+    const delta = Math.min(Math.max(now - autoScrollLastTime, 0), 100);
+    autoScrollLastTime = now;
 
-autoScrollBtn.addEventListener("click", function(e) {
+    autoScrollCarry += AUTO_SCROLL_SPEED * (delta / 16.6667);
 
+    const pixels = Math.floor(autoScrollCarry);
+
+    if(pixels >= 1){
+        autoScrollCarry -= pixels;
+
+        const current = getScrollTop();
+        const maxScroll = getMaxScroll();
+        const next = Math.min(current + pixels, maxScroll);
+
+        window.scrollTo(0, next);
+
+        if(next >= maxScroll - 1){
+            stopAutoScroll(true);
+            return;
+        }
+    }
+
+    autoScrollFrame = requestAnimationFrame(autoScrollStep);
+}
+
+function stopAutoScroll(atEnd = false){
+    autoScrolling = false;
+
+    if(autoScrollFrame !== null){
+        cancelAnimationFrame(autoScrollFrame);
+        autoScrollFrame = null;
+    }
+
+    document.documentElement.classList.remove("auto-scrolling");
+    autoScrollBtn.classList.add("show");
+    autoScrollBtn.innerHTML = "↓ &nbsp; Auto Scroll";
+
+    if(!atEnd && !autoScrollUserPaused){
+        scheduleAutoResume();
+    }
+}
+
+/*
+   User sedang scroll/geser:
+   auto-scroll langsung berhenti.
+   Setelah user berhenti, auto-scroll hidup lagi otomatis.
+*/
+function userInteractedWithScroll(){
+    if(autoScrollUserPaused) return;
+
+    if(autoScrolling){
+        stopAutoScroll();
+    }else{
+        scheduleAutoResume();
+    }
+}
+
+/* Tombol Auto Scroll:
+   - saat berjalan: pause manual
+   - saat pause manual: hidupkan lagi
+*/
+autoScrollBtn.addEventListener("click", function(e){
+    e.preventDefault();
     e.stopPropagation();
 
-    if (autoScrolling) {
-        stopAutoScroll();
-    } else {
+    clearAutoResume();
+
+    if(autoScrolling){
+        autoScrollUserPaused = true;
+        stopAutoScroll(true);
+    }else{
+        autoScrollUserPaused = false;
         startAutoScroll();
     }
-
 });
 
+/* Mouse / trackpad */
+window.addEventListener("wheel", function(e){
+    if(e.target && e.target.closest && e.target.closest("#autoScrollBtn")) return;
+    userInteractedWithScroll();
+}, {passive:true});
 
-/* ================================
-   MOUSE / TRACKPAD
-================================ */
+/* HP / touch */
+window.addEventListener("touchstart", function(e){
+    if(e.target && e.target.closest && e.target.closest("#autoScrollBtn")) return;
+    userInteractedWithScroll();
+}, {passive:true});
 
-window.addEventListener("wheel", function() {
+window.addEventListener("touchmove", function(e){
+    if(e.target && e.target.closest && e.target.closest("#autoScrollBtn")) return;
+    userInteractedWithScroll();
+}, {passive:true});
 
-    if (autoScrolling) {
-        stopAutoScroll();
-    }
+/* Keyboard manual scroll */
+window.addEventListener("keydown", function(e){
+    if(!["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," ","Spacebar"].includes(e.key)) return;
+    userInteractedWithScroll();
+});
 
-}, { passive: true });
+/* Open → tunggu 1.8 detik → mulai otomatis */
+openBtn.addEventListener("click", function(){
+    clearTimeout(autoScrollStartTimer);
+    clearAutoResume();
+    autoScrollUserPaused = false;
 
-
-/* ================================
-   TOUCH HP
-================================ */
-
-let touchStartY = 0;
-
-window.addEventListener("touchstart", function(e) {
-
-    if (!autoScrolling) return;
-
-    if (e.touches.length > 0) {
-        touchStartY = e.touches[0].clientY;
-    }
-
-}, { passive: true });
-
-
-window.addEventListener("touchmove", function(e) {
-
-    if (!autoScrolling) return;
-
-    if (e.touches.length === 0) return;
-
-    const currentY = e.touches[0].clientY;
-
-    /*
-       Hanya berhenti ketika benar-benar
-       menggeser layar.
-
-       Jadi kalau user hanya TAP tombol,
-       tombol tetap bisa diklik.
-    */
-    if (Math.abs(currentY - touchStartY) > 8) {
-        stopAutoScroll();
-    }
-
-}, { passive: true });
-
-
-/* ================================
-   KEYBOARD
-================================ */
-
-window.addEventListener("keydown", function(e) {
-
-    if (!autoScrolling) return;
-
-    const keys = [
-        "ArrowDown",
-        "ArrowUp",
-        "PageDown",
-        "PageUp",
-        "Home",
-        "End",
-        " "
-    ];
-
-    if (keys.includes(e.key)) {
-        stopAutoScroll();
-    }
-
+    autoScrollStartTimer = setTimeout(function(){
+        startAutoScroll();
+    }, 1800);
 });
 
 </script>
