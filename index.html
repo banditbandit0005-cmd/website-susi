@@ -2470,6 +2470,174 @@ html.auto-scrolling {
     }
 }
 
+/* ===== COUNTDOWN ELEGANT ===== */
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.countdown-item {
+    width: 75px;
+    min-height: 82px;
+    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(201, 164, 91, 0.45);
+    border-radius: 14px;
+
+    box-shadow:
+        0 0 20px rgba(201, 164, 91, 0.08),
+        inset 0 0 15px rgba(255, 255, 255, 0.02);
+
+    backdrop-filter: blur(8px);
+}
+
+.countdown-item span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--gold-light);
+
+    text-shadow:
+        0 0 12px rgba(201, 164, 91, 0.25);
+}
+
+.countdown-item small {
+    margin-top: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+
+.countdown-separator {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-top: -15px;
+    opacity: .8;
+}
+
+/* HP */
+@media (max-width: 500px) {
+
+    #countdown {
+        gap: 5px;
+    }
+
+    .countdown-item {
+        width: 62px;
+        min-height: 74px;
+    }
+
+    .countdown-item span {
+        font-size: 30px;
+    }
+
+    .countdown-item small {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+    }
+
+    .countdown-separator {
+        font-size: 22px;
+    }
+}
+
+/* ===== COUNTDOWN ELEGANT ===== */
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.countdown-item {
+    width: 75px;
+    min-height: 82px;
+    padding: 12px 6px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(201, 164, 91, 0.45);
+    border-radius: 14px;
+
+    box-shadow:
+        0 0 20px rgba(201, 164, 91, 0.08),
+        inset 0 0 15px rgba(255, 255, 255, 0.02);
+
+    backdrop-filter: blur(8px);
+}
+
+.countdown-item span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--gold-light);
+
+    text-shadow:
+        0 0 12px rgba(201, 164, 91, 0.25);
+}
+
+.countdown-item small {
+    margin-top: 8px;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+
+.countdown-separator {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-top: -15px;
+    opacity: .8;
+}
+
+/* Tampilan HP */
+@media (max-width: 500px) {
+
+    #countdown {
+        gap: 5px;
+    }
+
+    .countdown-item {
+        width: 62px;
+        min-height: 74px;
+    }
+
+    .countdown-item span {
+        font-size: 30px;
+    }
+
+    .countdown-item small {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+    }
+
+    .countdown-separator {
+        font-size: 22px;
+    }
+}
+
 </style>
 </head>
 
@@ -2491,8 +2659,32 @@ html.auto-scrolling {
             Surat ini akan terbuka sebentar lagi...
         </div>
 
-       <div id="countdown">
-    Menuju 18 September 2026 · 00:00 WIB
+  <div id="countdown">
+    <div class="countdown-item">
+        <span id="days">00</span>
+        <small>HARI</small>
+    </div>
+
+    <div class="countdown-separator">:</div>
+
+    <div class="countdown-item">
+        <span id="hours">00</span>
+        <small>JAM</small>
+    </div>
+
+    <div class="countdown-separator">:</div>
+
+    <div class="countdown-item">
+        <span id="minutes">00</span>
+        <small>MENIT</small>
+    </div>
+
+    <div class="countdown-separator">:</div>
+
+    <div class="countdown-item">
+        <span id="seconds">00</span>
+        <small>DETIK</small>
+    </div>
 </div>
 
     </div>
@@ -5359,14 +5551,22 @@ function updateCountdown() {
 
     const totalSeconds = Math.ceil(remaining / 1000);
 
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
+ const days = Math.floor(totalSeconds / 86400);
+const hours = Math.floor((totalSeconds % 86400) / 3600);
+const minutes = Math.floor((totalSeconds % 3600) / 60);
+const seconds = totalSeconds % 60;
 
-    countdown.textContent =
-        "Terbuka dalam " +
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(seconds).padStart(2, "0");
+document.getElementById("days").textContent =
+    String(days).padStart(2, "0");
+
+document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
 
     if (remaining <= 0) {
 
