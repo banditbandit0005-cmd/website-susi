@@ -2400,13 +2400,104 @@ html.auto-scrolling {
     }
 }
 
+/* ===== DATE LOCK / COUNTDOWN ===== */
+#dateLock {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(116,29,48,.45), transparent 45%),
+        linear-gradient(135deg, #090204, #260910, #090204);
+    color: var(--cream);
+    transition: opacity .8s ease, visibility .8s ease;
+}
+
+#dateLock.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.date-lock-content {
+    max-width: 500px;
+    animation: lockFadeIn 1.2s ease;
+}
+
+.date-lock-small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+}
+
+.date-lock-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(42px, 10vw, 75px);
+    color: var(--gold-light);
+    margin-bottom: 15px;
+}
+
+.date-lock-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--cream);
+}
+
+#countdown {
+    margin-top: 25px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--gold-light);
+}
+
+@keyframes lockFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 </style>
 </head>
 
 
 <body>
+<!-- ===== LOCK SCREEN ===== -->
+<div id="dateLock">
+    <div class="date-lock-content">
 
+        <div class="date-lock-small">
+            A little surprise...
+        </div>
 
+        <div class="date-lock-title">
+            Untuk Susi Sayang ♡
+        </div>
+
+        <div class="date-lock-text">
+            Surat ini akan terbuka sebentar lagi...
+        </div>
+
+       <div id="countdown">
+    Menuju 18 September 2026 · 00:00 WIB
+</div>
+
+    </div>
+</div>
+    
 <!-- =====================================================
      BACKGROUND
 ===================================================== -->
@@ -5250,6 +5341,54 @@ openBtn.addEventListener("click", function(){
     }, 1800);
 });
 
+</script>
+
+<script>
+/* ===== AUTO OPEN SETELAH 1 MENIT ===== */
+
+const dateLock = document.getElementById("dateLock");
+const countdown = document.getElementById("countdown");
+
+/* 1 menit setelah halaman dibuka */
+const target = new Date("2026-09-18T00:00:00+07:00").getTime();
+
+function updateCountdown() {
+
+    const now = Date.now();
+    const remaining = Math.max(0, target - now);
+
+    const totalSeconds = Math.ceil(remaining / 1000);
+
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    countdown.textContent =
+        "Terbuka dalam " +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+    if (remaining <= 0) {
+
+        dateLock.classList.add("hidden");
+
+        document.body.style.overflow = "";
+
+        clearInterval(countdownTimer);
+
+        setTimeout(() => {
+            dateLock.remove();
+        }, 1000);
+
+        return;
+    }
+}
+
+document.body.style.overflow = "hidden";
+
+updateCountdown();
+
+const countdownTimer = setInterval(updateCountdown, 250);
 </script>
 
 </body>
